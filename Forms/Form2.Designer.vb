@@ -40,11 +40,27 @@ Partial Class Form2
         FlowLayoutPanel1 = New FlowLayoutPanel()
         DataGridView1 = New DataGridView()
         TabPage2 = New TabPage()
+        BtnDetails = New Button()
+        BtnAddMember = New Button()
+        MembershipDataGrid = New DataGridView()
+        Label1 = New Label()
+        PictureBox1 = New PictureBox()
+        Label2 = New Label()
+        Label3 = New Label()
+        Button1 = New Button()
+        PictureBox2 = New PictureBox()
+        Label4 = New Label()
+        Label5 = New Label()
+        Button2 = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TableLayoutPanel1.SuspendLayout()
         GroupBox1.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        TabPage2.SuspendLayout()
+        CType(MembershipDataGrid, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' TabControl1
@@ -239,6 +255,18 @@ Partial Class Form2
         ' 
         ' TabPage2
         ' 
+        TabPage2.Controls.Add(Button2)
+        TabPage2.Controls.Add(Label5)
+        TabPage2.Controls.Add(Label4)
+        TabPage2.Controls.Add(PictureBox2)
+        TabPage2.Controls.Add(Button1)
+        TabPage2.Controls.Add(Label3)
+        TabPage2.Controls.Add(Label2)
+        TabPage2.Controls.Add(PictureBox1)
+        TabPage2.Controls.Add(Label1)
+        TabPage2.Controls.Add(BtnDetails)
+        TabPage2.Controls.Add(BtnAddMember)
+        TabPage2.Controls.Add(MembershipDataGrid)
         TabPage2.Location = New Point(4, 37)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
@@ -246,6 +274,113 @@ Partial Class Form2
         TabPage2.TabIndex = 1
         TabPage2.Text = "Membership Manager"
         TabPage2.UseVisualStyleBackColor = True
+        ' 
+        ' BtnDetails
+        ' 
+        BtnDetails.Location = New Point(490, 612)
+        BtnDetails.Name = "BtnDetails"
+        BtnDetails.Size = New Size(324, 66)
+        BtnDetails.TabIndex = 2
+        BtnDetails.Text = "Details"
+        BtnDetails.UseVisualStyleBackColor = True
+        ' 
+        ' BtnAddMember
+        ' 
+        BtnAddMember.Location = New Point(98, 609)
+        BtnAddMember.Name = "BtnAddMember"
+        BtnAddMember.Size = New Size(305, 65)
+        BtnAddMember.TabIndex = 1
+        BtnAddMember.Text = "Add Member"
+        BtnAddMember.UseVisualStyleBackColor = True
+        ' 
+        ' MembershipDataGrid
+        ' 
+        MembershipDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        MembershipDataGrid.Location = New Point(27, 24)
+        MembershipDataGrid.Name = "MembershipDataGrid"
+        MembershipDataGrid.RowHeadersWidth = 51
+        MembershipDataGrid.Size = New Size(993, 535)
+        MembershipDataGrid.TabIndex = 0
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(1104, 40)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(161, 46)
+        Label1.TabIndex = 3
+        Label1.Text = "Statistics"
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Location = New Point(1092, 128)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(210, 89)
+        PictureBox1.TabIndex = 4
+        PictureBox1.TabStop = False
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Location = New Point(1063, 252)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(77, 28)
+        Label2.TabIndex = 5
+        Label2.Text = "Expired"
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Location = New Point(1169, 255)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(56, 28)
+        Label3.TabIndex = 6
+        Label3.Text = "..........."
+        ' 
+        ' Button1
+        ' 
+        Button1.Location = New Point(1253, 253)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(78, 32)
+        Button1.TabIndex = 7
+        Button1.Text = "Check"
+        Button1.UseVisualStyleBackColor = True
+        ' 
+        ' PictureBox2
+        ' 
+        PictureBox2.Location = New Point(1116, 319)
+        PictureBox2.Name = "PictureBox2"
+        PictureBox2.Size = New Size(186, 86)
+        PictureBox2.TabIndex = 8
+        PictureBox2.TabStop = False
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Location = New Point(1068, 447)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(66, 28)
+        Label4.TabIndex = 9
+        Label4.Text = "Active"
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Location = New Point(1171, 449)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(56, 28)
+        Label5.TabIndex = 10
+        Label5.Text = "..........."
+        ' 
+        ' Button2
+        ' 
+        Button2.Location = New Point(1243, 447)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(88, 38)
+        Button2.TabIndex = 11
+        Button2.Text = "Check"
+        Button2.UseVisualStyleBackColor = True
         ' 
         ' Form2
         ' 
@@ -264,6 +399,11 @@ Partial Class Form2
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        TabPage2.ResumeLayout(False)
+        TabPage2.PerformLayout()
+        CType(MembershipDataGrid, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -284,5 +424,17 @@ Partial Class Form2
     Friend WithEvents BtnCalculateRevenue As Button
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents MembershipDataGrid As DataGridView
+    Friend WithEvents BtnAddMember As Button
+    Friend WithEvents BtnDetails As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label1 As Label
 
 End Class

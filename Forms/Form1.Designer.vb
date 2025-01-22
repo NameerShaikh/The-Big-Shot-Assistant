@@ -38,10 +38,10 @@ Partial Class Form1
         Label1.AutoSize = True
         Label1.BackColor = Color.Transparent
         Label1.FlatStyle = FlatStyle.Flat
-        Label1.Font = New Font("Lucida Calligraphy", 28.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Elephant", 28.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(49, 25)
         Label1.Name = "Label1"
-        Label1.Size = New Size(956, 60)
+        Label1.Size = New Size(930, 60)
         Label1.TabIndex = 0
         Label1.Text = "The Big Shot Pool And Snooker Club"
         Label1.TextAlign = ContentAlignment.MiddleCenter

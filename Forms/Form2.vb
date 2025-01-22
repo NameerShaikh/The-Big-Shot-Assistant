@@ -1,4 +1,8 @@
-﻿Public Class Form2
+﻿Imports System.ComponentModel
+Imports System.IO
+Imports OfficeOpenXml
+
+Public Class Form2
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -10,6 +14,14 @@
 
         ' Add the first row manually
         AddFirstRow()
+
+
+
+
+        InitializeMembershipDataGrid()
+        LoadMembershipData()
+
+
     End Sub
 
     Private Sub AddFirstRow()
@@ -300,6 +312,171 @@
     End Sub
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Private Sub InitializeMembershipDataGrid()
+        ' Clear existing columns (if any)
+        MembershipDataGrid.Columns.Clear()
+
+        ' Membership ID Column
+        Dim colMembershipID As New DataGridViewTextBoxColumn()
+        colMembershipID.Name = "Membership ID"
+        colMembershipID.HeaderText = "Membership ID"
+        colMembershipID.ReadOnly = True
+        MembershipDataGrid.Columns.Add(colMembershipID)
+
+        ' Name Column
+        Dim colName As New DataGridViewTextBoxColumn()
+        colName.Name = "Name"
+        colName.HeaderText = "Name"
+        MembershipDataGrid.Columns.Add(colName)
+
+
+
+        ' Membership Type Column (Dropdown)
+        Dim colMembershipType As New DataGridViewTextBoxColumn()
+        colMembershipType.Name = "Membership Type"
+        colMembershipType.HeaderText = "Type"
+        MembershipDataGrid.Columns.Add(colMembershipType)
+
+
+
+
+        ' Membership Status Column (Dropdown)
+        Dim colStatus As New DataGridViewTextBoxColumn()
+        colStatus.Name = "Membership Status"
+        colStatus.HeaderText = "Status"
+        MembershipDataGrid.Columns.Add(colStatus)
+
+
+
+
+
+        ' Icon Column for Status
+        Dim colStatusIcon As New DataGridViewImageColumn()
+        colStatusIcon.Name = "Status Icon"
+        colStatusIcon.HeaderText = ""
+        colStatusIcon.ImageLayout = DataGridViewImageCellLayout.Zoom ' Adjust image layout
+        MembershipDataGrid.Columns.Add(colStatusIcon)
+
+
+        ' Configure DataGridView properties
+        MembershipDataGrid.AllowUserToAddRows = True
+        MembershipDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        MembershipDataGrid.MultiSelect = False
+        MembershipDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+
+
+    End Sub
+
+
+
+
+
+    Private Sub LoadMembershipData()
+
+        ' Set the license context
+        ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial
+
+
+        Dim ExcelFilePath As String = "C:\Users\shaik\OneDrive\Documents\MembershipData.xlsx"
+        Try
+            ' Clear existing rows in DataGridView
+            MembershipDataGrid.Rows.Clear()
+
+            ' Open the Excel file
+            Using package As New ExcelPackage(New FileInfo(ExcelFilePath))
+                Dim worksheet = package.Workbook.Worksheets("Members")
+
+                ' Loop through the worksheet rows, starting from row 2 (skip header row)
+                Dim row As Integer = 2
+                While Not String.IsNullOrEmpty(worksheet.Cells(row, 1).Text)
+                    ' Read data from Excel cells
+                    Dim membershipId = worksheet.Cells(row, 1).Text
+                    Dim name = worksheet.Cells(row, 2).Text
+                    Dim membershipType = worksheet.Cells(row, 3).Text
+                    Dim status = worksheet.Cells(row, 4).Text
+
+                    ' Add data to DataGridView
+                    MembershipDataGrid.Rows.Add(membershipId, name, status, membershipType)
+
+                    row += 1
+                End While
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading membership data: " & ex.Message)
+        End Try
+    End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Private Sub BtnAddMember_Click(sender As Object, e As EventArgs) Handles BtnAddMember.Click
+        ' Open Add Member Form
+        Dim addMemberForm As New Form3()
+        addMemberForm.ShowDialog()
+
+        ' Reload DataGridView after form is closed
+        LoadMembershipData()
+    End Sub
+
+    Private Sub BtnDetails_Click(sender As Object, e As EventArgs) Handles BtnDetails.Click
+        Try
+            ' Ensure a row is selected
+            If MembershipDataGrid.SelectedRows.Count > 0 Then
+                ' Retrieve selected row data
+                Dim selectedRow As DataGridViewRow = MembershipDataGrid.SelectedRows(0)
+
+                ' Extract data from the selected row
+                Dim memberId As String = selectedRow.Cells("Membership ID").Value.ToString()
+                Dim name As String = selectedRow.Cells("Name").Value.ToString()
+                Dim status As String = selectedRow.Cells("Membership Status").Value.ToString()
+                Dim membershipType As String = selectedRow.Cells("Membership Type").Value.ToString()
+
+                ' Create an instance of the details form
+                Dim detailsForm As New Form4()
+
+                ' Pass data to the details form
+                detailsForm.TxtMembershipID.Text = memberId
+                detailsForm.TxtName.Text = name
+                detailsForm.TxtStatus.Text = status
+                detailsForm.TxtMembershipType.Text = membershipType
+
+                ' Show the details form
+                detailsForm.ShowDialog()
+            Else
+                MessageBox.Show("Please select a row first.", "No Row Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error displaying details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 
 End Class
