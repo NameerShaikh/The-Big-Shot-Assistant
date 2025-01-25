@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Logo And Leaflet\**" />
+    <EmbeddedResource Remove="Logo And Leaflet\**" />
+    <None Remove="Logo And Leaflet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />

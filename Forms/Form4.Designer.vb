@@ -22,6 +22,7 @@ Partial Class Form4
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form4))
         TxtMembershipID = New Label()
         TxtName = New Label()
         TxtGameType = New Label()
@@ -95,6 +96,7 @@ Partial Class Form4
         Controls.Add(TxtGameType)
         Controls.Add(TxtName)
         Controls.Add(TxtMembershipID)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Form4"
         Text = "Form4"
         ResumeLayout(False)

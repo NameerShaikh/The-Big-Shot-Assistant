@@ -14,7 +14,7 @@ Public Class Form3
 
 
     Private Function GenerateMemberId() As String
-        Dim filePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
+        Dim filePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
         Dim lastId As Integer = 0
 
         ' Check if the Excel file exists and load it
@@ -45,7 +45,7 @@ Public Class Form3
 
     Private Sub SaveMemberToExcel(memberId As String, name As String, gameType As String, status As String, startDate As String, endDate As String, membershipDuration As String, amountPaid As String)
 
-        Dim ExcelFilePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
+        Dim ExcelFilePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
 
         Try
             ' Check if the Excel file exists, if not, create a new one

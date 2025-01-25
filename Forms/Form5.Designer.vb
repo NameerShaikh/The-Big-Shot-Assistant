@@ -22,6 +22,7 @@ Partial Class ActiveExpiredForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ActiveExpiredForm))
         DataGridView1 = New DataGridView()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -42,6 +43,7 @@ Partial Class ActiveExpiredForm
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1196, 532)
         Controls.Add(DataGridView1)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "ActiveExpiredForm"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form5"

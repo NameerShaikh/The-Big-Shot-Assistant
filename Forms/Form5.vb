@@ -17,7 +17,7 @@ Public Class ActiveExpiredForm
         allMemberships = New List(Of Membership)()
 
         ' Define the file path for the Memberships.xlsx file
-        Dim membershipFilePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
+        Dim membershipFilePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
 
         If File.Exists(membershipFilePath) Then
             ' Open the Excel file and read data
@@ -66,6 +66,10 @@ Public Class ActiveExpiredForm
         Else
             MessageBox.Show("Membership file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+    End Sub
+
+    Private Sub ActiveExpiredForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
 

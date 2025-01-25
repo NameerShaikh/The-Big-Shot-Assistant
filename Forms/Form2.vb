@@ -98,7 +98,7 @@ Public Class Form2
     Private Sub DataGridView1_Paint(sender As Object, e As PaintEventArgs) Handles DataGridView1.Paint
         Try
             ' Load the logo image
-            Dim logo As Image = Image.FromFile("H:\The Big Shot Assistant\Logo And Leaflet\DGBG.jpg")
+            Dim logo As Image = Image.FromFile("C:\The Big Shot Assistant\Images\DGBG.jpg")
 
             ' Create a rectangle that matches the size of the DataGridView1
             Dim gridRectangle As New Rectangle(0, 0, DataGridView1.Width, DataGridView1.Height)
@@ -686,7 +686,7 @@ Public Class Form2
 
     Private Sub LoadMembershipData()
         ' Define the file path for the Memberships.xlsx file
-        Dim filePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
+        Dim filePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
 
         ' Ensure the file exists before proceeding
         If Not File.Exists(filePath) Then
@@ -734,8 +734,8 @@ Public Class Form2
     Private Sub UpdateMembershipIcons()
         Try
             ' Paths to icons for active and expired members
-            Dim activeIcon As Image = Image.FromFile("H:\The Big Shot Assistant\Logo And Leaflet\Check and Cross Icon\Check.jpg")
-            Dim expiredIcon As Image = Image.FromFile("H:\The Big Shot Assistant\Logo And Leaflet\Check and Cross Icon\Cross.jpg")
+            Dim activeIcon As Image = Image.FromFile("C:\The Big Shot Assistant\Images\Check.jpg")
+            Dim expiredIcon As Image = Image.FromFile("C:\The Big Shot Assistant\Images\Cross.jpg")
 
             ' Loop through the rows in MembershipDataGrid
             For Each row As DataGridViewRow In MembershipDataGrid.Rows
@@ -889,7 +889,7 @@ Public Class Form2
 
     Private Sub ExportEntryManager(currentDateTime As String, totalRevenue As Double)
         ' Define the master file path for Entry Manager
-        Dim entryFilePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Entry Manager\Entries.xlsx"
+        Dim entryFilePath As String = "C:\The Big Shot Assistant\Database\Entries.xlsx"
 
         Dim package As New ExcelPackage(New FileInfo(entryFilePath))
         Dim worksheet As ExcelWorksheet
@@ -929,7 +929,7 @@ Public Class Form2
 
     Private Function ExportNotesAndAddOns(currentDateTime As String) As Boolean
         ' Define the master file path for Notes and AddOns
-        Dim notesFilePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Notes and AddOns\Notes and AddOns Data.xlsx"
+        Dim notesFilePath As String = "C:\The Big Shot Assistant\Database\Notes and AddOns Data.xlsx"
 
         ' Get the current notes text from RichTextBox
         Dim currentNotes As String = RichTextBox1.Text
