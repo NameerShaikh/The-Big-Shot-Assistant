@@ -4,6 +4,10 @@ Imports System.IO.Packaging
 Imports System.Runtime.InteropServices.JavaScript.JSType
 Imports OfficeOpenXml
 
+
+
+
+
 Public Class Form2
 
     Dim activeCustomerNames As New List(Of String)()
@@ -25,9 +29,10 @@ Public Class Form2
         InitializeMembershipDataGrid()
         LoadMembershipData()
 
+        CalculateMembershipStatus()
 
 
-
+        UpdateMembershipIcons()
 
     End Sub
 
@@ -368,7 +373,7 @@ Public Class Form2
         Next
 
         ' Update the label with the total revenue in INR format
-        TotalRevenueLabel1.Text = "Total Revenue: ₹" & totalRevenue.ToString("N2") ' INR symbol with 2 decimal places
+        TotalRevenueLabel1.Text = totalRevenue.ToString("N2") ' INR symbol with 2 decimal places
     End Sub
 
     ' Button click event to reset the total revenue to zero
@@ -440,32 +445,15 @@ Public Class Form2
     End Sub
 
 
-    Private Sub BtnEndTime_Click_1(sender As Object, e As EventArgs) Handles BtnEndTime.Click
 
-    End Sub
 
-    Private Sub BtnExit_Click(sender As Object, e As EventArgs) Handles BtnExit.Click
-        ' Prompt the user with a confirmation message box
-        Dim result As DialogResult = MessageBox.Show("Do you want to export the entries before closing?", "Exit Application", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
-        ' Handle the user's response
-        Select Case result
-            Case DialogResult.Yes
-                ' If the user chooses Yes, call the function to export the entries
-                ' ExportEntries()
-                ' Close the application after exporting
-                Me.Close()
 
-            Case DialogResult.No
-                ' If the user chooses No, just close the application without exporting
-                Me.Close()
 
-            Case DialogResult.Cancel
-                ' If the user chooses Cancel, do nothing and return to the application
-                Return
 
-        End Select
-    End Sub
+
+
+
 
 
     Function RoundToNearestFive(amount As Double) As Double
@@ -643,8 +631,9 @@ Public Class Form2
         ' Icon Column for Status
         Dim colStatusIcon As New DataGridViewImageColumn()
         colStatusIcon.Name = "Status Icon"
-        colStatusIcon.HeaderText = ""
+        colStatusIcon.HeaderText = "Status Icon"
         colStatusIcon.ImageLayout = DataGridViewImageCellLayout.Zoom ' Adjust image layout
+        colStatusIcon.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter ' Center alignment
         MembershipDataGrid.Columns.Add(colStatusIcon)
 
 
@@ -660,6 +649,33 @@ Public Class Form2
 
 
 
+    Private Sub CalculateMembershipStatus()
+        Try
+            Dim activeCount As Integer = 0
+            Dim expiredCount As Integer = 0
+
+            ' Loop through rows in MembershipDataGrid to count active and expired members
+            For Each row As DataGridViewRow In MembershipDataGrid.Rows
+                If Not row.IsNewRow Then
+                    Dim membershipStatus As String = row.Cells("Membership Status").Value?.ToString().ToLower()
+
+                    If membershipStatus = "active" Then
+                        activeCount += 1
+                    ElseIf membershipStatus = "expired" Then
+                        expiredCount += 1
+                    End If
+                End If
+            Next
+
+            ' Update labels with the counts
+            ActiveMemberLabel.Text = $"{activeCount}"
+            ExpiredMemberLabel.Text = $"{expiredCount}"
+
+        Catch ex As Exception
+            ' Handle any unexpected errors
+            MessageBox.Show($"An error occurred while calculating membership status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 
 
@@ -669,38 +685,43 @@ Public Class Form2
 
 
     Private Sub LoadMembershipData()
+        ' Define the file path for the Memberships.xlsx file
+        Dim filePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
 
-        ' Set the license context
-        ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial
+        ' Ensure the file exists before proceeding
+        If Not File.Exists(filePath) Then
+            MessageBox.Show("The Memberships file does not exist.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
 
+        ' Load the data from the Excel file
+        ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial ' Set the license context
 
-        Dim ExcelFilePath As String = "C:\Users\shaik\OneDrive\Documents\MembershipData.xlsx"
-        Try
-            ' Clear existing rows in DataGridView
+        Using package As New ExcelPackage(New FileInfo(filePath))
+            Dim worksheet As ExcelWorksheet = package.Workbook.Worksheets(0) ' Load the first worksheet
+
+            ' Ensure the worksheet has data
+            If worksheet.Dimension Is Nothing Then Exit Sub
+
+            ' Clear existing rows in the DataGridView
             MembershipDataGrid.Rows.Clear()
 
-            ' Open the Excel file
-            Using package As New ExcelPackage(New FileInfo(ExcelFilePath))
-                Dim worksheet = package.Workbook.Worksheets("Members")
+            ' Loop through the rows in the worksheet starting from the second row (skip headers)
+            For row As Integer = 2 To worksheet.Dimension.End.Row
+                ' Retrieve data from the respective columns
+                Dim membershipID As String = worksheet.Cells(row, 1).Text ' Membership ID
+                Dim name As String = worksheet.Cells(row, 2).Text ' Name
+                Dim gameType As String = worksheet.Cells(row, 3).Text ' Game Type
+                Dim status As String = worksheet.Cells(row, 4).Text ' Status
+                Dim statusIcon As Image = Nothing
 
-                ' Loop through the worksheet rows, starting from row 2 (skip header row)
-                Dim row As Integer = 2
-                While Not String.IsNullOrEmpty(worksheet.Cells(row, 1).Text)
-                    ' Read data from Excel cells
-                    Dim membershipId = worksheet.Cells(row, 1).Text
-                    Dim name = worksheet.Cells(row, 2).Text
-                    Dim gameType = worksheet.Cells(row, 3).Text
-                    Dim status = worksheet.Cells(row, 4).Text
+                ' Determine the icon based on the status
+                UpdateMembershipIcons()
 
-                    ' Add data to DataGridView
-                    MembershipDataGrid.Rows.Add(membershipId, name, gameType, status)
-
-                    row += 1
-                End While
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading membership data: " & ex.Message)
-        End Try
+                ' Add the data to the DataGridView
+                MembershipDataGrid.Rows.Add(membershipID, name, gameType, status, statusIcon)
+            Next
+        End Using
     End Sub
 
 
@@ -708,6 +729,47 @@ Public Class Form2
 
 
 
+
+
+    Private Sub UpdateMembershipIcons()
+        Try
+            ' Paths to icons for active and expired members
+            Dim activeIcon As Image = Image.FromFile("H:\The Big Shot Assistant\Logo And Leaflet\Check and Cross Icon\Check.jpg")
+            Dim expiredIcon As Image = Image.FromFile("H:\The Big Shot Assistant\Logo And Leaflet\Check and Cross Icon\Cross.jpg")
+
+            ' Loop through the rows in MembershipDataGrid
+            For Each row As DataGridViewRow In MembershipDataGrid.Rows
+                If Not row.IsNewRow Then
+                    Dim membershipStatus As String = row.Cells("Membership Status").Value?.ToString().ToLower()
+
+                    ' Assign icon based on status
+                    If membershipStatus = "active" Then
+                        row.Cells("Status Icon").Value = activeIcon
+                    ElseIf membershipStatus = "expired" Then
+                        row.Cells("Status Icon").Value = expiredIcon
+                    End If
+                End If
+            Next
+
+        Catch ex As Exception
+            ' Handle any errors (e.g., file not found, null reference)
+            MessageBox.Show($"An error occurred while updating membership icons: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+
+
+    Private Sub BtnCheckActive_Click(sender As Object, e As EventArgs) Handles BtnCheckActive.Click
+        ' Open the form showing active memberships
+        Dim activeForm As New ActiveExpiredForm(True) ' Pass True to show active memberships
+        activeForm.Show()
+    End Sub
+
+    Private Sub BtnCheckExpired_Click(sender As Object, e As EventArgs) Handles BtnCheckExpired.Click
+        ' Open the form showing expired memberships
+        Dim expiredForm As New ActiveExpiredForm(False) ' Pass False to show expired memberships
+        expiredForm.Show()
+    End Sub
 
 
 
@@ -725,6 +787,9 @@ Public Class Form2
 
         ' Reload DataGridView after form is closed
         LoadMembershipData()
+
+        CalculateMembershipStatus()
+        UpdateMembershipIcons()
     End Sub
 
     Private Sub BtnDetails_Click(sender As Object, e As EventArgs) Handles BtnDetails.Click
@@ -799,18 +864,22 @@ Public Class Form2
 
     Private Sub BtnExport_Click(sender As Object, e As EventArgs) Handles BtnExport.Click
         Try
-            ' Get the current date and time for timestamping the data inside the file
+            ' Step 1: Programmatically press BtnCalculateRevenue to calculate total revenue
+            BtnCalculateRevenue.PerformClick()
+
+            ' Step 2: Get the calculated total revenue
+            Dim totalRevenue As Double = Double.Parse(TotalRevenueLabel1.Text)
+
+            ' Step 3: Get the current date and time for timestamping the data inside the file
             Dim currentDateTime As String = DateTime.Now.ToString("yyyyMMdd_HHmmss")
 
             ' Export for Entry Manager Tab
-            ExportEntryManager(currentDateTime)
+            ExportEntryManager(currentDateTime, totalRevenue)
 
 
 
-            ' Export for Notes and AddOns Tab (if there are changes)
-            If ExportNotesAndAddOns(currentDateTime) Then
-                MessageBox.Show("Notes and AddOns data exported successfully!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
+            ' Export for Notes and AddOns Tab
+            ExportNotesAndAddOns(currentDateTime)
 
             MessageBox.Show("Data Exported Successfully!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
@@ -818,43 +887,40 @@ Public Class Form2
         End Try
     End Sub
 
-    Private Sub ExportEntryManager(currentDateTime As String)
+    Private Sub ExportEntryManager(currentDateTime As String, totalRevenue As Double)
         ' Define the master file path for Entry Manager
         Dim entryFilePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Entry Manager\Entries.xlsx"
 
-        ' Open the Excel package
         Dim package As New ExcelPackage(New FileInfo(entryFilePath))
-
-        ' Check if there are worksheets in the workbook
         Dim worksheet As ExcelWorksheet
+
+        ' Check if the worksheet exists or needs to be created
         If package.Workbook.Worksheets.Count = 0 Then
-            ' If no worksheets exist, create a new worksheet
-            worksheet = package.Workbook.Worksheets.Add("EntryData")
+            worksheet = package.Workbook.Worksheets.Add("Entries")
         Else
-            ' If worksheets exist, get the first one
             worksheet = package.Workbook.Worksheets(0)
         End If
 
         ' Add the timestamp to a new row in the first column
-        Dim rowIndex As Integer
-        If worksheet.Dimension Is Nothing Then
-            rowIndex = 1 ' If worksheet is empty, start at row 1
-        Else
-            rowIndex = worksheet.Dimension.End.Row + 1 ' Otherwise, append to the next available row
-        End If
-
+        Dim rowIndex As Integer = If(worksheet.Dimension Is Nothing, 1, worksheet.Dimension.End.Row + 1)
         worksheet.Cells(rowIndex, 1).Value = $"Exported on {currentDateTime}"
 
-        ' Loop through the data and append it
+        ' Loop through the data and append it, and add Total Revenue in the last row
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
             For j As Integer = 0 To DataGridView1.Columns.Count - 1
                 worksheet.Cells(i + rowIndex + 1, j + 1).Value = DataGridView1.Rows(i).Cells(j).Value
             Next
         Next
 
+        ' Add Total Revenue in the last row
+        worksheet.Cells(rowIndex + DataGridView1.Rows.Count + 1, DataGridView1.Columns.Count + 1).Value = totalRevenue
+
         ' Save the file with the new data
         package.Save()
     End Sub
+
+
+
 
 
 
@@ -896,11 +962,11 @@ Public Class Form2
                 rowIndex = worksheet.Dimension.End.Row + 1 ' Otherwise, append to the next available row
             End If
 
-            ' Add the timestamp to a new row in the first column
-            worksheet.Cells(rowIndex, 1).Value = $"Exported on {currentDateTime}"
+            ' Add the timestamp in column "A" for each row
+            worksheet.Cells(rowIndex, 1).Value = currentDateTime
 
-            ' Add notes to the next row
-            worksheet.Cells(rowIndex + 1, 1).Value = currentNotes
+            ' Add notes to the next row in column "B"
+            worksheet.Cells(rowIndex + 1, 2).Value = currentNotes
 
             ' Save the file with the new data
             package.Save()
@@ -956,8 +1022,34 @@ Public Class Form2
 
 
 
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Try
+            ' Show message box prompting user to export data before closing
+            Dim result As DialogResult = MessageBox.Show("Do you want to export the data before closing?", "Export Data", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
+            ' If user chooses Yes, export the data
+            If result = DialogResult.Yes Then
+                ' Trigger the export logic
+                BtnExport.PerformClick()  ' Triggering the Export process
 
+                ' If export is successful, close the application
+                MessageBox.Show("Data exported successfully. Closing the application.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' If user chooses No, close the application without exporting
+            ElseIf result = DialogResult.No Then
+                MessageBox.Show("Closing the application without exporting data.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' If user clicks Cancel, prevent the form from closing
+            ElseIf result = DialogResult.Cancel Then
+                e.Cancel = True ' Cancel the form closing event
+                MessageBox.Show("The application will not close. Please save your data or go back.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+
+        Catch ex As Exception
+            ' Handle any errors that occur during the exit process
+            MessageBox.Show("An error occurred while attempting to exit: " & ex.Message, "Exit Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 
 

@@ -22,11 +22,11 @@ Partial Class Form2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
+        Dim DataGridViewCellStyle7 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As DataGridViewCellStyle = New DataGridViewCellStyle()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
         TableLayoutPanel1 = New TableLayoutPanel()
@@ -38,19 +38,18 @@ Partial Class Form2
         BtnStartTime = New Button()
         BtnEndTime = New Button()
         BtnCalculate = New Button()
-        BtnExit = New Button()
         TotalRevenueLabel1 = New Label()
-        BtnExport = New Button()
         BtnTotal = New Button()
+        BtnExport = New Button()
         FlowLayoutPanel1 = New FlowLayoutPanel()
         DataGridView1 = New DataGridView()
         TabPage2 = New TabPage()
-        Button2 = New Button()
-        Label5 = New Label()
+        ExpiredMemberLabel = New Label()
+        ActiveMemberLabel = New Label()
+        BtnCheckExpired = New Button()
         Label4 = New Label()
         PictureBox2 = New PictureBox()
-        Button1 = New Button()
-        Label3 = New Label()
+        BtnCheckActive = New Button()
         Label2 = New Label()
         PictureBox1 = New PictureBox()
         Label1 = New Label()
@@ -116,10 +115,9 @@ Partial Class Form2
         TableLayoutPanel1.Controls.Add(BtnStartTime, 1, 0)
         TableLayoutPanel1.Controls.Add(BtnEndTime, 1, 1)
         TableLayoutPanel1.Controls.Add(BtnCalculate, 2, 1)
-        TableLayoutPanel1.Controls.Add(BtnExit, 4, 1)
         TableLayoutPanel1.Controls.Add(TotalRevenueLabel1, 5, 0)
-        TableLayoutPanel1.Controls.Add(BtnExport, 2, 0)
         TableLayoutPanel1.Controls.Add(BtnTotal, 3, 1)
+        TableLayoutPanel1.Controls.Add(BtnExport, 4, 1)
         TableLayoutPanel1.Location = New Point(21, 617)
         TableLayoutPanel1.Name = "TableLayoutPanel1"
         TableLayoutPanel1.RowCount = 2
@@ -213,16 +211,6 @@ Partial Class Form2
         BtnCalculate.Text = "Calculate Table Charge"
         BtnCalculate.UseVisualStyleBackColor = True
         ' 
-        ' BtnExit
-        ' 
-        BtnExit.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        BtnExit.Location = New Point(1003, 62)
-        BtnExit.Name = "BtnExit"
-        BtnExit.Size = New Size(244, 40)
-        BtnExit.TabIndex = 4
-        BtnExit.Text = "Exit"
-        BtnExit.UseVisualStyleBackColor = True
-        ' 
         ' TotalRevenueLabel1
         ' 
         TotalRevenueLabel1.Anchor = AnchorStyles.Bottom
@@ -232,16 +220,6 @@ Partial Class Form2
         TotalRevenueLabel1.Name = "TotalRevenueLabel1"
         TotalRevenueLabel1.Size = New Size(251, 38)
         TotalRevenueLabel1.TabIndex = 11
-        ' 
-        ' BtnExport
-        ' 
-        BtnExport.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        BtnExport.Location = New Point(503, 9)
-        BtnExport.Name = "BtnExport"
-        BtnExport.Size = New Size(244, 40)
-        BtnExport.TabIndex = 3
-        BtnExport.Text = "Export"
-        BtnExport.UseVisualStyleBackColor = True
         ' 
         ' BtnTotal
         ' 
@@ -253,6 +231,16 @@ Partial Class Form2
         BtnTotal.TabIndex = 13
         BtnTotal.Text = "Total"
         BtnTotal.UseVisualStyleBackColor = True
+        ' 
+        ' BtnExport
+        ' 
+        BtnExport.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnExport.Location = New Point(1003, 62)
+        BtnExport.Name = "BtnExport"
+        BtnExport.Size = New Size(244, 40)
+        BtnExport.TabIndex = 3
+        BtnExport.Text = "Export"
+        BtnExport.UseVisualStyleBackColor = True
         ' 
         ' FlowLayoutPanel1
         ' 
@@ -270,31 +258,31 @@ Partial Class Form2
         DataGridView1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = SystemColors.Window
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
-        DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = SystemColors.Window
+        DataGridViewCellStyle5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle5.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = DataGridViewTriState.True
+        DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
         DataGridView1.Location = New Point(28, 20)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 51
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.True
-        DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.WrapMode = DataGridViewTriState.True
+        DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle6
         DataGridView1.Size = New Size(1549, 580)
         DataGridView1.TabIndex = 0
         ' 
         ' TabPage2
         ' 
-        TabPage2.Controls.Add(Button2)
-        TabPage2.Controls.Add(Label5)
+        TabPage2.Controls.Add(ExpiredMemberLabel)
+        TabPage2.Controls.Add(ActiveMemberLabel)
+        TabPage2.Controls.Add(BtnCheckExpired)
         TabPage2.Controls.Add(Label4)
         TabPage2.Controls.Add(PictureBox2)
-        TabPage2.Controls.Add(Button1)
-        TabPage2.Controls.Add(Label3)
+        TabPage2.Controls.Add(BtnCheckActive)
         TabPage2.Controls.Add(Label2)
         TabPage2.Controls.Add(PictureBox1)
         TabPage2.Controls.Add(Label1)
@@ -309,89 +297,108 @@ Partial Class Form2
         TabPage2.Text = "Membership Manager"
         TabPage2.UseVisualStyleBackColor = True
         ' 
-        ' Button2
+        ' ExpiredMemberLabel
         ' 
-        Button2.Location = New Point(1243, 447)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(88, 38)
-        Button2.TabIndex = 11
-        Button2.Text = "Check"
-        Button2.UseVisualStyleBackColor = True
+        ExpiredMemberLabel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        ExpiredMemberLabel.Font = New Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ExpiredMemberLabel.Location = New Point(1338, 469)
+        ExpiredMemberLabel.Name = "ExpiredMemberLabel"
+        ExpiredMemberLabel.Size = New Size(177, 114)
+        ExpiredMemberLabel.TabIndex = 13
+        ExpiredMemberLabel.Text = "5"
+        ExpiredMemberLabel.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' Label5
+        ' ActiveMemberLabel
         ' 
-        Label5.AutoSize = True
-        Label5.Location = New Point(1171, 449)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(56, 28)
-        Label5.TabIndex = 10
-        Label5.Text = "..........."
+        ActiveMemberLabel.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        ActiveMemberLabel.Font = New Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ActiveMemberLabel.Location = New Point(1338, 183)
+        ActiveMemberLabel.Name = "ActiveMemberLabel"
+        ActiveMemberLabel.Size = New Size(177, 114)
+        ActiveMemberLabel.TabIndex = 12
+        ActiveMemberLabel.Text = "1"
+        ActiveMemberLabel.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' BtnCheckExpired
+        ' 
+        BtnCheckExpired.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        BtnCheckExpired.Location = New Point(1383, 623)
+        BtnCheckExpired.Name = "BtnCheckExpired"
+        BtnCheckExpired.Size = New Size(88, 44)
+        BtnCheckExpired.TabIndex = 11
+        BtnCheckExpired.Text = "Check"
+        BtnCheckExpired.UseVisualStyleBackColor = True
         ' 
         ' Label4
         ' 
+        Label4.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label4.AutoSize = True
-        Label4.Location = New Point(1068, 447)
+        Label4.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label4.Location = New Point(1293, 135)
         Label4.Name = "Label4"
-        Label4.Size = New Size(66, 28)
+        Label4.Size = New Size(280, 31)
         Label4.TabIndex = 9
-        Label4.Text = "Active"
+        Label4.Text = "Membership Active Count"
         ' 
         ' PictureBox2
         ' 
-        PictureBox2.Location = New Point(1116, 319)
+        PictureBox2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        PictureBox2.BackgroundImage = CType(resources.GetObject("PictureBox2.BackgroundImage"), Image)
+        PictureBox2.BackgroundImageLayout = ImageLayout.Stretch
+        PictureBox2.Location = New Point(1078, 412)
         PictureBox2.Name = "PictureBox2"
-        PictureBox2.Size = New Size(186, 86)
+        PictureBox2.Size = New Size(194, 230)
         PictureBox2.TabIndex = 8
         PictureBox2.TabStop = False
         ' 
-        ' Button1
+        ' BtnCheckActive
         ' 
-        Button1.Location = New Point(1253, 253)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(78, 32)
-        Button1.TabIndex = 7
-        Button1.Text = "Check"
-        Button1.UseVisualStyleBackColor = True
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.Location = New Point(1169, 255)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(56, 28)
-        Label3.TabIndex = 6
-        Label3.Text = "..........."
+        BtnCheckActive.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        BtnCheckActive.Location = New Point(1383, 318)
+        BtnCheckActive.Name = "BtnCheckActive"
+        BtnCheckActive.Size = New Size(88, 44)
+        BtnCheckActive.TabIndex = 7
+        BtnCheckActive.Text = "Check"
+        BtnCheckActive.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
+        Label2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         Label2.AutoSize = True
-        Label2.Location = New Point(1063, 252)
+        Label2.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(1293, 412)
         Label2.Name = "Label2"
-        Label2.Size = New Size(77, 28)
+        Label2.Size = New Size(294, 31)
         Label2.TabIndex = 5
-        Label2.Text = "Expired"
+        Label2.Text = "Membership Expired Count"
         ' 
         ' PictureBox1
         ' 
-        PictureBox1.Location = New Point(1092, 128)
+        PictureBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        PictureBox1.BackColor = SystemColors.ButtonHighlight
+        PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
+        PictureBox1.BackgroundImageLayout = ImageLayout.Stretch
+        PictureBox1.Location = New Point(1078, 135)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(210, 89)
+        PictureBox1.Size = New Size(194, 230)
         PictureBox1.TabIndex = 4
         PictureBox1.TabStop = False
         ' 
         ' Label1
         ' 
+        Label1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(1104, 40)
+        Label1.Font = New Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(1213, 34)
         Label1.Name = "Label1"
-        Label1.Size = New Size(161, 46)
+        Label1.Size = New Size(209, 60)
         Label1.TabIndex = 3
         Label1.Text = "Statistics"
         ' 
         ' BtnDetails
         ' 
-        BtnDetails.Location = New Point(490, 612)
+        BtnDetails.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        BtnDetails.Location = New Point(632, 612)
         BtnDetails.Name = "BtnDetails"
         BtnDetails.Size = New Size(324, 66)
         BtnDetails.TabIndex = 2
@@ -400,31 +407,33 @@ Partial Class Form2
         ' 
         ' BtnAddMember
         ' 
-        BtnAddMember.Location = New Point(98, 609)
+        BtnAddMember.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+        BtnAddMember.Location = New Point(139, 612)
         BtnAddMember.Name = "BtnAddMember"
-        BtnAddMember.Size = New Size(305, 65)
+        BtnAddMember.Size = New Size(324, 66)
         BtnAddMember.TabIndex = 1
         BtnAddMember.Text = "Add Member"
         BtnAddMember.UseVisualStyleBackColor = True
         ' 
         ' MembershipDataGrid
         ' 
+        MembershipDataGrid.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         MembershipDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = SystemColors.Window
-        DataGridViewCellStyle3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle3.ForeColor = SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = DataGridViewTriState.False
-        MembershipDataGrid.DefaultCellStyle = DataGridViewCellStyle3
-        MembershipDataGrid.Location = New Point(27, 24)
+        DataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = SystemColors.Window
+        DataGridViewCellStyle7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle7.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = DataGridViewTriState.False
+        MembershipDataGrid.DefaultCellStyle = DataGridViewCellStyle7
+        MembershipDataGrid.Location = New Point(42, 34)
         MembershipDataGrid.Name = "MembershipDataGrid"
         MembershipDataGrid.ReadOnly = True
         MembershipDataGrid.RowHeadersWidth = 51
-        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.WrapMode = DataGridViewTriState.False
-        MembershipDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.WrapMode = DataGridViewTriState.False
+        MembershipDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle8
         MembershipDataGrid.ShowCellToolTips = False
         MembershipDataGrid.Size = New Size(993, 535)
         MembershipDataGrid.TabIndex = 0
@@ -512,7 +521,6 @@ Partial Class Form2
     Friend WithEvents TotalRevenueLabel1 As Label
     Friend WithEvents BtnEndTime As Button
     Friend WithEvents BtnExport As Button
-    Friend WithEvents BtnExit As Button
     Friend WithEvents BtnStartTime As Button
     Friend WithEvents BtnCalculate As Button
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
@@ -523,12 +531,10 @@ Partial Class Form2
     Friend WithEvents MembershipDataGrid As DataGridView
     Friend WithEvents BtnAddMember As Button
     Friend WithEvents BtnDetails As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Label5 As Label
+    Friend WithEvents BtnCheckExpired As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Label3 As Label
+    Friend WithEvents BtnCheckActive As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label1 As Label
@@ -537,5 +543,7 @@ Partial Class Form2
     Friend WithEvents BtnSaveNotes As Button
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents BtnTotal As Button
+    Friend WithEvents ExpiredMemberLabel As Label
+    Friend WithEvents ActiveMemberLabel As Label
 
 End Class
