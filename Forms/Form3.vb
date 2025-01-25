@@ -14,7 +14,7 @@ Public Class Form3
 
 
     Private Function GenerateMemberId() As String
-        Dim filePath As String = "C:\Users\shaik\OneDrive\Documents\MembershipData.xlsx"
+        Dim filePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
         Dim lastId As Integer = 0
 
         ' Check if the Excel file exists and load it
@@ -43,9 +43,9 @@ Public Class Form3
     End Function
 
 
-    Private Sub SaveMemberToExcel(memberId As String, name As String, membershipType As String, status As String, startDate As String, endDate As String)
+    Private Sub SaveMemberToExcel(memberId As String, name As String, gameType As String, status As String, startDate As String, endDate As String, membershipDuration As String, amountPaid As String)
 
-        Dim ExcelFilePath As String = "C:\Users\shaik\OneDrive\Documents\MembershipData.xlsx"
+        Dim ExcelFilePath As String = "C:\Users\shaik\OneDrive\Documents\The Big Shot Assistant Database\Membership Manager\Memberships.xlsx"
 
         Try
             ' Check if the Excel file exists, if not, create a new one
@@ -55,10 +55,12 @@ Public Class Form3
                     Dim worksheet = package.Workbook.Worksheets.Add("Members")
                     worksheet.Cells(1, 1).Value = "Membership ID"
                     worksheet.Cells(1, 2).Value = "Name"
-                    worksheet.Cells(1, 3).Value = "Membership Type"
+                    worksheet.Cells(1, 3).Value = "Game Type"
                     worksheet.Cells(1, 4).Value = "Status"
                     worksheet.Cells(1, 5).Value = "Start Date"
                     worksheet.Cells(1, 6).Value = "End Date"
+                    worksheet.Cells(1, 7).Value = "Membership Duration"
+                    worksheet.Cells(1, 8).Value = "Amount Paid"
                     package.Save() ' Save the new Excel file
                 End Using
                 MessageBox.Show("Excel file created.")
@@ -74,10 +76,12 @@ Public Class Form3
 
                 worksheet.Cells(rowCount, 1).Value = memberId
                 worksheet.Cells(rowCount, 2).Value = name
-                worksheet.Cells(rowCount, 3).Value = membershipType
+                worksheet.Cells(rowCount, 3).Value = gameType
                 worksheet.Cells(rowCount, 4).Value = status
                 worksheet.Cells(rowCount, 5).Value = startDate
                 worksheet.Cells(rowCount, 6).Value = endDate
+                worksheet.Cells(rowCount, 7).Value = membershipDuration
+                worksheet.Cells(rowCount, 8).Value = amountPaid
                 package.Save() ' Save the updated Excel file
                 MessageBox.Show("Data saved successfully.")
             End Using
@@ -96,15 +100,17 @@ Public Class Form3
 
         ' Collect other member details
         Dim name As String = TxtName.Text
-        Dim membershipType As String = CmbMembershipType.SelectedItem.ToString()
+        Dim gameType As String = CmbGameType.SelectedItem.ToString()
         Dim status As String = CmbStatus.SelectedItem.ToString()
         Dim startDate As String = DtpStartDate.Value.ToString("yyyy-MM-dd")
         Dim endDate As String = DtpEndDate.Value.ToString("yyyy-MM-dd")
+        Dim membershipDuration As String = TxtMembershipDuration.Text
+        Dim amountPaid As String = CmbAmtPaid.SelectedItem.ToString()
 
         Try
 
             ' Save the data to the Excel file
-            SaveMemberToExcel(memberId, name, membershipType, status, startDate, endDate)
+            SaveMemberToExcel(memberId, name, gameType, status, startDate, endDate, membershipDuration, amountPaid)
 
 
             ' Close the form

@@ -24,7 +24,7 @@ Partial Class Form4
     Private Sub InitializeComponent()
         TxtMembershipID = New Label()
         TxtName = New Label()
-        TxtMembershipType = New Label()
+        TxtGameType = New Label()
         TxtStatus = New Label()
         Label4 = New Label()
         Label5 = New Label()
@@ -48,14 +48,14 @@ Partial Class Form4
         TxtName.TabIndex = 1
         TxtName.Text = "Label1"
         ' 
-        ' TxtMembershipType
+        ' TxtGameType
         ' 
-        TxtMembershipType.AutoSize = True
-        TxtMembershipType.Location = New Point(260, 204)
-        TxtMembershipType.Name = "TxtMembershipType"
-        TxtMembershipType.Size = New Size(53, 20)
-        TxtMembershipType.TabIndex = 2
-        TxtMembershipType.Text = "Label2"
+        TxtGameType.AutoSize = True
+        TxtGameType.Location = New Point(260, 204)
+        TxtGameType.Name = "TxtGameType"
+        TxtGameType.Size = New Size(53, 20)
+        TxtGameType.TabIndex = 2
+        TxtGameType.Text = "Label2"
         ' 
         ' TxtStatus
         ' 
@@ -92,7 +92,7 @@ Partial Class Form4
         Controls.Add(Label5)
         Controls.Add(Label4)
         Controls.Add(TxtStatus)
-        Controls.Add(TxtMembershipType)
+        Controls.Add(TxtGameType)
         Controls.Add(TxtName)
         Controls.Add(TxtMembershipID)
         Name = "Form4"
@@ -103,7 +103,7 @@ Partial Class Form4
 
     Friend WithEvents TxtMembershipID As Label
     Friend WithEvents TxtName As Label
-    Friend WithEvents TxtMembershipType As Label
+    Friend WithEvents TxtGameType As Label
     Friend WithEvents TxtStatus As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
