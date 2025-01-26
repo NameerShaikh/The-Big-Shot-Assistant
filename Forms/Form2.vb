@@ -806,14 +806,25 @@ Public Class Form2
                 Dim GameType As String = selectedRow.Cells("Game Type").Value.ToString()
                 Dim status As String = selectedRow.Cells("Membership Status").Value.ToString()
 
+
+                Dim startDate As String = selectedRow.Cells("Start Date").Value.ToString()
+                Dim endDate As String = selectedRow.Cells("End Date").Value.ToString()
+
+                Dim amountPaid As String = selectedRow.Cells("Amount Paid").Value.ToString()
+                'Dim membershipDuration As String = selectedRow.Cells("Membership Duration").Value.ToString()
+
                 ' Create an instance of the details form
                 Dim detailsForm As New Form4()
 
                 ' Pass data to the details form
                 detailsForm.TxtMembershipID.Text = memberId
                 detailsForm.TxtName.Text = name
-                detailsForm.TxtStatus.Text = status
                 detailsForm.TxtGameType.Text = GameType
+                detailsForm.TxtStartDate.Text = startDate
+                detailsForm.TxtEndDate.Text = endDate
+                detailsForm.TxtAmtPaid.Text = amountPaid
+                detailsForm.TxtStatus.Text = status
+
 
                 ' Show the details form
                 detailsForm.ShowDialog()

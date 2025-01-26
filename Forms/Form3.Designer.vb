@@ -41,14 +41,14 @@ Partial Class Form3
         Label8 = New Label()
         CmbAmtPaid = New ComboBox()
         TableLayoutPanel1 = New TableLayoutPanel()
-        Label9 = New Label()
+        Label16 = New Label()
         Label10 = New Label()
         Label11 = New Label()
         Label12 = New Label()
         Label13 = New Label()
         Label14 = New Label()
         Label15 = New Label()
-        Label16 = New Label()
+        Label9 = New Label()
         TableLayoutPanel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -299,17 +299,17 @@ Partial Class Form3
         TableLayoutPanel1.Size = New Size(621, 526)
         TableLayoutPanel1.TabIndex = 18
         ' 
-        ' Label9
+        ' Label16
         ' 
-        Label9.Anchor = AnchorStyles.None
-        Label9.AutoSize = True
-        Label9.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(6, 18)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(35, 29)
-        Label9.TabIndex = 18
-        Label9.Text = "1]"
-        Label9.TextAlign = ContentAlignment.TopCenter
+        Label16.Anchor = AnchorStyles.None
+        Label16.AutoSize = True
+        Label16.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label16.Location = New Point(6, 476)
+        Label16.Name = "Label16"
+        Label16.Size = New Size(35, 29)
+        Label16.TabIndex = 25
+        Label16.Text = "8]"
+        Label16.TextAlign = ContentAlignment.TopCenter
         ' 
         ' Label10
         ' 
@@ -383,17 +383,17 @@ Partial Class Form3
         Label15.Text = "2]"
         Label15.TextAlign = ContentAlignment.TopCenter
         ' 
-        ' Label16
+        ' Label9
         ' 
-        Label16.Anchor = AnchorStyles.None
-        Label16.AutoSize = True
-        Label16.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(6, 476)
-        Label16.Name = "Label16"
-        Label16.Size = New Size(35, 29)
-        Label16.TabIndex = 25
-        Label16.Text = "8]"
-        Label16.TextAlign = ContentAlignment.TopCenter
+        Label9.Anchor = AnchorStyles.None
+        Label9.AutoSize = True
+        Label9.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Location = New Point(6, 18)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(35, 29)
+        Label9.TabIndex = 18
+        Label9.Text = "1]"
+        Label9.TextAlign = ContentAlignment.TopCenter
         ' 
         ' Form3
         ' 
@@ -405,6 +405,7 @@ Partial Class Form3
         Font = New Font("Segoe UI", 13.8F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(5)
+        MaximizeBox = False
         Name = "Form3"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Add Member Details"
