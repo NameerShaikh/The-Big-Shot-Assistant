@@ -8,7 +8,7 @@ Public Class Form1
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        ProgressBar1.Increment(+20)
+        ProgressBar1.Increment(+10)
         Select Case ProgressBar1.Value
             Case 100
                 Timer1.Enabled = False
