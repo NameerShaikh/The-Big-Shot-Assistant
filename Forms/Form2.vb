@@ -792,49 +792,58 @@ Public Class Form2
         UpdateMembershipIcons()
     End Sub
 
-    Private Sub BtnDetails_Click(sender As Object, e As EventArgs) Handles BtnDetails.Click
-        Try
-            ' Ensure a row is selected
-            If MembershipDataGrid.SelectedRows.Count > 0 Then
-                ' Retrieve selected row data
-                Dim selectedRow As DataGridViewRow = MembershipDataGrid.SelectedRows(0)
+    Private Sub btnDetails_Click(sender As Object, e As EventArgs) Handles BtnDetails.Click
+        ' Check if a row is selected in the DataGridView
+        If MembershipDataGrid.SelectedRows.Count > 0 Then
+            ' Get the selected Member ID (or key identifier) from the DataGridView
+            Dim memberId As String = MembershipDataGrid.SelectedRows(0).Cells(0).Value.ToString()
 
-                ' Extract data from the selected row
-                Dim memberId As String = selectedRow.Cells("Membership ID").Value.ToString()
-                Dim name As String = selectedRow.Cells("Name").Value.ToString()
+            ' Path to the Excel file
+            Dim excelFilePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
 
-                Dim GameType As String = selectedRow.Cells("Game Type").Value.ToString()
-                Dim status As String = selectedRow.Cells("Membership Status").Value.ToString()
+            ' Call the function to fetch details from the Excel file
+            Dim memberDetails As List(Of String) = GetMemberDetailsFromExcel(memberId, excelFilePath)
 
-
-                Dim startDate As String = selectedRow.Cells("Start Date").Value.ToString()
-                Dim endDate As String = selectedRow.Cells("End Date").Value.ToString()
-
-                Dim amountPaid As String = selectedRow.Cells("Amount Paid").Value.ToString()
-                'Dim membershipDuration As String = selectedRow.Cells("Membership Duration").Value.ToString()
-
-                ' Create an instance of the details form
-                Dim detailsForm As New Form4()
-
-                ' Pass data to the details form
-                detailsForm.TxtMembershipID.Text = memberId
-                detailsForm.TxtName.Text = name
-                detailsForm.TxtGameType.Text = GameType
-                detailsForm.TxtStartDate.Text = startDate
-                detailsForm.TxtEndDate.Text = endDate
-                detailsForm.TxtAmtPaid.Text = amountPaid
-                detailsForm.TxtStatus.Text = status
-
-
-                ' Show the details form
-                detailsForm.ShowDialog()
+            ' If details are found, open Form4 and pass the details
+            If memberDetails IsNot Nothing AndAlso memberDetails.Count >= 8 Then
+                Dim form4 As New Form4()
+                form4.DisplayMemberDetails(memberDetails)
+                form4.Show()
             Else
-                MessageBox.Show("Please select a row first.", "No Row Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Member details not found in the Excel file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        Catch ex As Exception
-            MessageBox.Show("Error displaying details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        Else
+            MessageBox.Show("Please select a row to view details.", "No Row Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
     End Sub
+
+    ' Function to retrieve member details from the Excel file using EPPlus
+    Private Function GetMemberDetailsFromExcel(memberId As String, filePath As String) As List(Of String)
+        Dim details As New List(Of String)
+
+        Try
+            ' Open the Excel file using EPPlus
+            Using package As New ExcelPackage(New FileInfo(filePath))
+                Dim worksheet As ExcelWorksheet = package.Workbook.Worksheets(0) ' Assume data is in the first sheet
+
+                ' Find the row with the matching Member ID (assuming it is in column 1)
+                For row As Integer = 2 To worksheet.Dimension.Rows ' Start from 2 to skip headers
+                    Dim currentId As String = worksheet.Cells(row, 1).Text ' Column A for Member ID
+                    If currentId = memberId Then
+                        ' Fetch all 8 columns of data (columns 1 to 8)
+                        For col As Integer = 1 To 8
+                            details.Add(worksheet.Cells(row, col).Text)
+                        Next
+                        Exit For
+                    End If
+                Next
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error reading Excel file: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        Return details
+    End Function
 
 
 

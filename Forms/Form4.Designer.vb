@@ -264,6 +264,7 @@ Partial Class Form4
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MaximizeBox = False
         Name = "Form4"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Member Details"
         TableLayoutPanel1.ResumeLayout(False)
         TableLayoutPanel1.PerformLayout()
