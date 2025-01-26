@@ -518,7 +518,7 @@ Public Class Form2
                                 ElseIf frames = 2 Then
                                     amount = 300
                                 ElseIf frames > 2 Then
-                                    amount = (frames * 125)
+                                    amount = 300 + ((frames - 2) * 125)
                                 End If
                             End If
                     End Select
@@ -886,15 +886,17 @@ Public Class Form2
         Try
             ' Step 1: Programmatically press BtnCalculateRevenue to calculate total revenue
             BtnCalculateRevenue.PerformClick()
+            BtnBaseTotal.PerformClick()
 
             ' Step 2: Get the calculated total revenue
             Dim totalRevenue As Double = Double.Parse(TotalRevenueLabel1.Text)
+            Dim totalBaseRevenue As Double = Double.Parse(TotalTableChargeLabel.Text)
 
             ' Step 3: Get the current date and time for timestamping the data inside the file
             Dim currentDateTime As String = DateTime.Now.ToString("yyyyMMdd_HHmmss")
 
             ' Export for Entry Manager Tab
-            ExportEntryManager(currentDateTime, totalRevenue)
+            ExportEntryManager(currentDateTime, totalRevenue, totalBaseRevenue)
 
 
 
@@ -907,7 +909,7 @@ Public Class Form2
         End Try
     End Sub
 
-    Private Sub ExportEntryManager(currentDateTime As String, totalRevenue As Double)
+    Private Sub ExportEntryManager(currentDateTime As String, totalRevenue As Double, totalBaseRevenue As Double)
         ' Define the master file path for Entry Manager
         Dim entryFilePath As String = "C:\The Big Shot Assistant\Database\Entries.xlsx"
 
@@ -932,8 +934,9 @@ Public Class Form2
             Next
         Next
 
-        ' Add Total Revenue in the last row
-        worksheet.Cells(rowIndex + DataGridView1.Rows.Count + 1, DataGridView1.Columns.Count + 1).Value = totalRevenue
+        ' Add Total Base Revenue in the last second row
+        worksheet.Cells(rowIndex + DataGridView1.Rows.Count + 1, DataGridView1.Columns.Count + 1).Value = totalBaseRevenue
+        worksheet.Cells(rowIndex + DataGridView1.Rows.Count + 1, DataGridView1.Columns.Count + 2).Value = totalRevenue
 
         ' Save the file with the new data
         package.Save()
@@ -1071,12 +1074,20 @@ Public Class Form2
         End Try
     End Sub
 
+    Private Sub BtnBaseTotal_Click(sender As Object, e As EventArgs) Handles BtnBaseTotal.Click
+        Dim totalBaseRevenue As Decimal = 0
 
+        ' Loop through all rows in the DataGridView
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            ' Check if the row is not empty, not struck out, and the Amount column has a valid value
+            If Not row.IsNewRow AndAlso Not IsRowStruckOut(row) AndAlso Not IsDBNull(row.Cells("Amount").Value) AndAlso IsNumeric(row.Cells("Amount").Value) Then
+                totalBaseRevenue += Convert.ToDecimal(row.Cells("Amount").Value)
+            End If
+        Next
 
-
-
-
-
+        ' Update the label with the total revenue in INR format
+        TotalTableChargeLabel.Text = totalBaseRevenue.ToString("N2") ' INR symbol with 2 decimal places
+    End Sub
 End Class
 
 

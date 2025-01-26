@@ -7,12 +7,17 @@
     <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
+    <ApplicationIcon>The Big Shot Icon 2.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Logo And Leaflet\**" />
     <EmbeddedResource Remove="Logo And Leaflet\**" />
     <None Remove="Logo And Leaflet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="The Big Shot Icon 2.ico" />
   </ItemGroup>
 
   <ItemGroup>

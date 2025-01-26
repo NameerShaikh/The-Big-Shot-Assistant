@@ -30,6 +30,7 @@ Partial Class Form2
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
         TableLayoutPanel1 = New TableLayoutPanel()
+        BtnBaseTotal = New Button()
         BtnAddRow = New Button()
         BtnStrikeRow = New Button()
         GroupBox1 = New GroupBox()
@@ -37,10 +38,11 @@ Partial Class Form2
         BtnCalculateRevenue = New Button()
         BtnStartTime = New Button()
         BtnEndTime = New Button()
-        BtnCalculate = New Button()
         TotalRevenueLabel1 = New Label()
+        BtnCalculate = New Button()
         BtnTotal = New Button()
         BtnExport = New Button()
+        TotalTableChargeLabel = New Label()
         FlowLayoutPanel1 = New FlowLayoutPanel()
         DataGridView1 = New DataGridView()
         TabPage2 = New TabPage()
@@ -109,15 +111,17 @@ Partial Class Form2
         TableLayoutPanel1.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 16.1290321F))
         TableLayoutPanel1.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 16.1290321F))
         TableLayoutPanel1.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 19.35484F))
+        TableLayoutPanel1.Controls.Add(BtnBaseTotal, 4, 1)
         TableLayoutPanel1.Controls.Add(BtnAddRow, 0, 0)
         TableLayoutPanel1.Controls.Add(BtnStrikeRow, 0, 1)
         TableLayoutPanel1.Controls.Add(GroupBox1, 5, 1)
         TableLayoutPanel1.Controls.Add(BtnStartTime, 1, 0)
         TableLayoutPanel1.Controls.Add(BtnEndTime, 1, 1)
-        TableLayoutPanel1.Controls.Add(BtnCalculate, 2, 1)
         TableLayoutPanel1.Controls.Add(TotalRevenueLabel1, 5, 0)
-        TableLayoutPanel1.Controls.Add(BtnTotal, 3, 1)
-        TableLayoutPanel1.Controls.Add(BtnExport, 4, 1)
+        TableLayoutPanel1.Controls.Add(BtnCalculate, 2, 0)
+        TableLayoutPanel1.Controls.Add(BtnTotal, 2, 1)
+        TableLayoutPanel1.Controls.Add(BtnExport, 3, 1)
+        TableLayoutPanel1.Controls.Add(TotalTableChargeLabel, 4, 0)
         TableLayoutPanel1.Location = New Point(21, 617)
         TableLayoutPanel1.Name = "TableLayoutPanel1"
         TableLayoutPanel1.RowCount = 2
@@ -125,6 +129,17 @@ Partial Class Form2
         TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
         TableLayoutPanel1.Size = New Size(1556, 105)
         TableLayoutPanel1.TabIndex = 12
+        ' 
+        ' BtnBaseTotal
+        ' 
+        BtnBaseTotal.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnBaseTotal.AutoSize = True
+        BtnBaseTotal.Location = New Point(1003, 61)
+        BtnBaseTotal.Name = "BtnBaseTotal"
+        BtnBaseTotal.Size = New Size(244, 41)
+        BtnBaseTotal.TabIndex = 13
+        BtnBaseTotal.Text = "Base Total"
+        BtnBaseTotal.UseVisualStyleBackColor = True
         ' 
         ' BtnAddRow
         ' 
@@ -201,16 +216,6 @@ Partial Class Form2
         BtnEndTime.Text = "End Time"
         BtnEndTime.UseVisualStyleBackColor = True
         ' 
-        ' BtnCalculate
-        ' 
-        BtnCalculate.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        BtnCalculate.Location = New Point(503, 62)
-        BtnCalculate.Name = "BtnCalculate"
-        BtnCalculate.Size = New Size(244, 40)
-        BtnCalculate.TabIndex = 7
-        BtnCalculate.Text = "Calculate Table Charge"
-        BtnCalculate.UseVisualStyleBackColor = True
-        ' 
         ' TotalRevenueLabel1
         ' 
         TotalRevenueLabel1.Anchor = AnchorStyles.Bottom
@@ -221,26 +226,46 @@ Partial Class Form2
         TotalRevenueLabel1.Size = New Size(251, 38)
         TotalRevenueLabel1.TabIndex = 11
         ' 
+        ' BtnCalculate
+        ' 
+        BtnCalculate.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnCalculate.Location = New Point(503, 9)
+        BtnCalculate.Name = "BtnCalculate"
+        BtnCalculate.Size = New Size(244, 40)
+        BtnCalculate.TabIndex = 7
+        BtnCalculate.Text = "Calculate Table Charge"
+        BtnCalculate.UseVisualStyleBackColor = True
+        ' 
         ' BtnTotal
         ' 
         BtnTotal.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         BtnTotal.AutoSize = True
-        BtnTotal.Location = New Point(753, 62)
+        BtnTotal.Location = New Point(503, 62)
         BtnTotal.Name = "BtnTotal"
         BtnTotal.Size = New Size(244, 40)
         BtnTotal.TabIndex = 13
-        BtnTotal.Text = "Total"
+        BtnTotal.Text = "Calculate Total"
         BtnTotal.UseVisualStyleBackColor = True
         ' 
         ' BtnExport
         ' 
         BtnExport.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        BtnExport.Location = New Point(1003, 62)
+        BtnExport.Location = New Point(753, 62)
         BtnExport.Name = "BtnExport"
         BtnExport.Size = New Size(244, 40)
         BtnExport.TabIndex = 3
         BtnExport.Text = "Export"
         BtnExport.UseVisualStyleBackColor = True
+        ' 
+        ' TotalTableChargeLabel
+        ' 
+        TotalTableChargeLabel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        TotalTableChargeLabel.BackColor = SystemColors.Control
+        TotalTableChargeLabel.BorderStyle = BorderStyle.FixedSingle
+        TotalTableChargeLabel.Location = New Point(1003, 14)
+        TotalTableChargeLabel.Name = "TotalTableChargeLabel"
+        TotalTableChargeLabel.Size = New Size(244, 38)
+        TotalTableChargeLabel.TabIndex = 14
         ' 
         ' FlowLayoutPanel1
         ' 
@@ -474,6 +499,7 @@ Partial Class Form2
         ' 
         ' TableLayoutPanel2
         ' 
+        TableLayoutPanel2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         TableLayoutPanel2.BackColor = SystemColors.Control
         TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetDouble
         TableLayoutPanel2.ColumnCount = 1
@@ -545,5 +571,7 @@ Partial Class Form2
     Friend WithEvents BtnTotal As Button
     Friend WithEvents ExpiredMemberLabel As Label
     Friend WithEvents ActiveMemberLabel As Label
+    Friend WithEvents BtnBaseTotal As Button
+    Friend WithEvents TotalTableChargeLabel As Label
 
 End Class
