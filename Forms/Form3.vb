@@ -85,6 +85,7 @@ Public Class Form3
                 package.Save() ' Save the updated Excel file
                 MessageBox.Show("Data saved successfully.")
             End Using
+            UpdateMembershipStatusInExcel()
 
         Catch ex As Exception
             ' Handle any errors that occur
@@ -97,6 +98,8 @@ Public Class Form3
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         ' Generate Member ID
         Dim memberId As String = GenerateMemberId()
+
+
 
         ' Collect other member details
         Dim name As String = TxtName.Text
@@ -117,6 +120,50 @@ Public Class Form3
             Me.Close()
         Catch ex As Exception
             MessageBox.Show("Error saving member: " & ex.Message)
+        End Try
+    End Sub
+
+
+    Private Sub UpdateMembershipStatusInExcel()
+        Try
+            ' Define the file path
+            Dim filePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
+
+
+            ' Load the data from the Excel file
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial ' Set the license context
+
+            ' Load the Excel file
+            Using package As New ExcelPackage(New FileInfo(filePath))
+                Dim worksheet As ExcelWorksheet = package.Workbook.Worksheets(0)
+
+                ' Loop through each row in the Excel file (starting from the second row)
+                Dim row As Integer = 2
+                While Not String.IsNullOrEmpty(worksheet.Cells(row, 1).Text)
+                    Dim endDateText As String = worksheet.Cells(row, 6).Text ' Column 6: End Date
+                    Dim statusCell As ExcelRange = worksheet.Cells(row, 4)   ' Column 4: Status
+
+                    ' Check if the End Date is valid
+                    Dim endDate As Date
+                    If Date.TryParse(endDateText, endDate) Then
+                        ' Update the status based on the current date
+                        If Date.Today > endDate Then
+                            statusCell.Value = "Expired"
+                        Else
+                            statusCell.Value = "Active"
+                        End If
+                    End If
+
+                    row += 1
+                End While
+
+                ' Save changes to the Excel file
+                package.Save()
+            End Using
+
+            MessageBox.Show("Membership statuses have been updated successfully!", "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error updating membership statuses: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
