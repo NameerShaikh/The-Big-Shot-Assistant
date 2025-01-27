@@ -493,8 +493,10 @@ Public Class Form2
                         Case "pool"
                             If duration <= 30 Then
                                 amount = 100
-                            ElseIf duration <= 60 Then
+                            ElseIf duration <= 50 Then
                                 amount = 100 + (duration - 30) * (150 / 60)
+                            ElseIf duration <= 60 Then
+                                amount = 150
                             Else
                                 amount = 150 + (duration - 60) * (150 / 60)
                             End If
@@ -502,15 +504,25 @@ Public Class Form2
                         Case "mini snooker"
                             If duration <= 30 Then
                                 amount = 130
-                            ElseIf duration <= 60 Then
+                            ElseIf duration <= 50 Then
                                 amount = 130 + (duration - 30) * (200 / 60)
+                            ElseIf duration <= 60 Then
+                                amount = 200
                             Else
                                 amount = 200 + (duration - 60) * (200 / 60)
                             End If
 
                         Case "snooker"
                             If paymentMethod = "time wise" Then
-                                amount = duration * (250 / 60)
+                                If duration <= 30 Then
+                                    amount = 150
+                                ElseIf duration <= 50 Then
+                                    amount = 150 + (duration - 30) * (200 / 60)
+                                ElseIf duration <= 60 Then
+                                    amount = 250
+                                Else
+                                    amount = 200 + (duration - 60) * (200 / 60)
+                                End If
                             ElseIf paymentMethod = "frame wise" Then
                                 ' Existing frame-based calculation logic
                                 Dim frames As Integer = Integer.Parse(row.Cells("FrameNumber").Value?.ToString())
