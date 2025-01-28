@@ -1118,27 +1118,48 @@ Public Class Form2
 
 
 
+
+    Dim exportInitiated As Boolean = False ' Flag to track export initiation
+    Dim closingInitiated As Boolean = False ' Flag to track if form closing is initiated
+
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Try
-            ' Show message box prompting user to export data before closing
-            Dim result As DialogResult = MessageBox.Show("Do you want to export the data before closing?", "Export Data", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            ' Check if the form closing logic has been initiated before
+            If Not closingInitiated Then
+                ' Mark the form closing as initiated
+                closingInitiated = True
 
-            ' If user chooses Yes, export the data
-            If result = DialogResult.Yes Then
-                ' Trigger the export logic
-                BtnExport.PerformClick()  ' Triggering the Export process
+                ' Check if export has already been initiated
+                If Not exportInitiated Then
+                    ' Show message box prompting user to export data before closing
+                    Dim result As DialogResult = MessageBox.Show("Do you want to export the data before closing?", "Export Data", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
-                ' If export is successful, close the application
-                MessageBox.Show("Data exported successfully. Closing the application.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' If user chooses Yes, export the data
+                    If result = DialogResult.Yes Then
+                        ' Set the flag to true to indicate export has been initiated
+                        exportInitiated = True
 
-                ' If user chooses No, close the application without exporting
-            ElseIf result = DialogResult.No Then
-                MessageBox.Show("Closing the application without exporting data.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' Trigger the export logic (only once)
+                        BtnExport.PerformClick()  ' Triggering the Export process
 
-                ' If user clicks Cancel, prevent the form from closing
-            ElseIf result = DialogResult.Cancel Then
-                e.Cancel = True ' Cancel the form closing event
-                MessageBox.Show("The application will not close. Please save your data or go back.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' Show success message and exit application after export
+                        MessageBox.Show("Data exported successfully. Closing the application.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Application.Exit()  ' Exit the application
+
+                        ' If user chooses No, close the application without exporting
+                    ElseIf result = DialogResult.No Then
+                        MessageBox.Show("Closing the application without exporting data.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Application.Exit()  ' Exit the application
+
+                        ' If user clicks Cancel, prevent the form from closing
+                    ElseIf result = DialogResult.Cancel Then
+                        e.Cancel = True ' Cancel the form closing event
+                        MessageBox.Show("The application will not close. Please save your data or go back.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End If
+            Else
+                ' Prevent additional closing prompts if closing was initiated
+                e.Cancel = False
             End If
 
         Catch ex As Exception
@@ -1146,6 +1167,9 @@ Public Class Form2
             MessageBox.Show("An error occurred while attempting to exit: " & ex.Message, "Exit Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
+
 
     Private Sub BtnBaseTotal_Click(sender As Object, e As EventArgs) Handles BtnBaseTotal.Click
         Dim totalBaseRevenue As Decimal = 0
