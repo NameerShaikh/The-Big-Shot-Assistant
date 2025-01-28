@@ -26,7 +26,6 @@ Partial Class Form2
         Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
         TableLayoutPanel1 = New TableLayoutPanel()
@@ -77,29 +76,31 @@ Partial Class Form2
         ' TabControl1
         ' 
         TabControl1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        TabControl1.Appearance = TabAppearance.FlatButtons
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
         TabControl1.Controls.Add(TabPage4)
-        TabControl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TabControl1.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TabControl1.Location = New Point(12, 12)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
+        TabControl1.ShowToolTips = True
         TabControl1.Size = New Size(1607, 769)
         TabControl1.SizeMode = TabSizeMode.FillToRight
         TabControl1.TabIndex = 0
         ' 
         ' TabPage1
         ' 
+        TabPage1.BackColor = Color.ForestGreen
         TabPage1.Controls.Add(TableLayoutPanel1)
         TabPage1.Controls.Add(FlowLayoutPanel1)
         TabPage1.Controls.Add(DataGridView1)
-        TabPage1.Location = New Point(4, 37)
+        TabPage1.Location = New Point(4, 40)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(1599, 728)
+        TabPage1.Size = New Size(1599, 725)
         TabPage1.TabIndex = 0
         TabPage1.Text = "Entry Manager"
-        TabPage1.UseVisualStyleBackColor = True
         ' 
         ' TableLayoutPanel1
         ' 
@@ -122,7 +123,7 @@ Partial Class Form2
         TableLayoutPanel1.Controls.Add(BtnTotal, 2, 1)
         TableLayoutPanel1.Controls.Add(BtnExport, 3, 1)
         TableLayoutPanel1.Controls.Add(TotalTableChargeLabel, 4, 0)
-        TableLayoutPanel1.Location = New Point(21, 617)
+        TableLayoutPanel1.Location = New Point(21, 614)
         TableLayoutPanel1.Name = "TableLayoutPanel1"
         TableLayoutPanel1.RowCount = 2
         TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
@@ -134,33 +135,42 @@ Partial Class Form2
         ' 
         BtnBaseTotal.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         BtnBaseTotal.AutoSize = True
+        BtnBaseTotal.BackColor = Color.Black
+        BtnBaseTotal.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnBaseTotal.ForeColor = Color.White
         BtnBaseTotal.Location = New Point(1003, 61)
         BtnBaseTotal.Name = "BtnBaseTotal"
         BtnBaseTotal.Size = New Size(244, 41)
         BtnBaseTotal.TabIndex = 13
         BtnBaseTotal.Text = "Base Total"
-        BtnBaseTotal.UseVisualStyleBackColor = True
+        BtnBaseTotal.UseVisualStyleBackColor = False
         ' 
         ' BtnAddRow
         ' 
         BtnAddRow.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         BtnAddRow.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        BtnAddRow.BackColor = Color.Black
+        BtnAddRow.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        BtnAddRow.ForeColor = Color.White
         BtnAddRow.Location = New Point(3, 9)
         BtnAddRow.Name = "BtnAddRow"
         BtnAddRow.Size = New Size(244, 40)
         BtnAddRow.TabIndex = 1
         BtnAddRow.Text = "Add Row"
-        BtnAddRow.UseVisualStyleBackColor = True
+        BtnAddRow.UseVisualStyleBackColor = False
         ' 
         ' BtnStrikeRow
         ' 
         BtnStrikeRow.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnStrikeRow.BackColor = Color.Black
+        BtnStrikeRow.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnStrikeRow.ForeColor = Color.White
         BtnStrikeRow.Location = New Point(3, 62)
         BtnStrikeRow.Name = "BtnStrikeRow"
         BtnStrikeRow.Size = New Size(244, 40)
         BtnStrikeRow.TabIndex = 2
         BtnStrikeRow.Text = "StrikeOut"
-        BtnStrikeRow.UseVisualStyleBackColor = True
+        BtnStrikeRow.UseVisualStyleBackColor = False
         ' 
         ' GroupBox1
         ' 
@@ -178,49 +188,63 @@ Partial Class Form2
         ' 
         BtnClearRevenue.Anchor = AnchorStyles.Right
         BtnClearRevenue.AutoSize = True
+        BtnClearRevenue.BackColor = Color.Black
+        BtnClearRevenue.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnClearRevenue.ForeColor = Color.White
         BtnClearRevenue.Location = New Point(160, 7)
         BtnClearRevenue.Name = "BtnClearRevenue"
         BtnClearRevenue.Size = New Size(85, 40)
         BtnClearRevenue.TabIndex = 13
         BtnClearRevenue.Text = "Clear"
-        BtnClearRevenue.UseVisualStyleBackColor = True
+        BtnClearRevenue.UseVisualStyleBackColor = False
         ' 
         ' BtnCalculateRevenue
         ' 
         BtnCalculateRevenue.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         BtnCalculateRevenue.AutoSize = True
+        BtnCalculateRevenue.BackColor = Color.Black
+        BtnCalculateRevenue.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnCalculateRevenue.ForeColor = Color.White
         BtnCalculateRevenue.Location = New Point(0, 7)
         BtnCalculateRevenue.Name = "BtnCalculateRevenue"
-        BtnCalculateRevenue.Size = New Size(154, 41)
+        BtnCalculateRevenue.Size = New Size(156, 41)
         BtnCalculateRevenue.TabIndex = 12
         BtnCalculateRevenue.Text = "Total Revenue"
-        BtnCalculateRevenue.UseVisualStyleBackColor = True
+        BtnCalculateRevenue.UseVisualStyleBackColor = False
         ' 
         ' BtnStartTime
         ' 
         BtnStartTime.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnStartTime.BackColor = Color.Black
+        BtnStartTime.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnStartTime.ForeColor = SystemColors.ButtonHighlight
         BtnStartTime.Location = New Point(253, 9)
         BtnStartTime.Name = "BtnStartTime"
         BtnStartTime.Size = New Size(244, 40)
         BtnStartTime.TabIndex = 5
         BtnStartTime.Text = "Start Time"
-        BtnStartTime.UseVisualStyleBackColor = True
+        BtnStartTime.UseVisualStyleBackColor = False
         ' 
         ' BtnEndTime
         ' 
         BtnEndTime.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnEndTime.BackColor = Color.Black
+        BtnEndTime.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnEndTime.ForeColor = Color.White
         BtnEndTime.Location = New Point(253, 62)
         BtnEndTime.Name = "BtnEndTime"
         BtnEndTime.Size = New Size(244, 40)
         BtnEndTime.TabIndex = 6
         BtnEndTime.Text = "End Time"
-        BtnEndTime.UseVisualStyleBackColor = True
+        BtnEndTime.UseVisualStyleBackColor = False
         ' 
         ' TotalRevenueLabel1
         ' 
         TotalRevenueLabel1.Anchor = AnchorStyles.Bottom
-        TotalRevenueLabel1.BackColor = SystemColors.Control
+        TotalRevenueLabel1.BackColor = Color.Black
         TotalRevenueLabel1.BorderStyle = BorderStyle.FixedSingle
+        TotalRevenueLabel1.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        TotalRevenueLabel1.ForeColor = Color.White
         TotalRevenueLabel1.Location = New Point(1277, 14)
         TotalRevenueLabel1.Name = "TotalRevenueLabel1"
         TotalRevenueLabel1.Size = New Size(251, 38)
@@ -229,39 +253,50 @@ Partial Class Form2
         ' BtnCalculate
         ' 
         BtnCalculate.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnCalculate.BackColor = Color.Black
+        BtnCalculate.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnCalculate.ForeColor = Color.White
         BtnCalculate.Location = New Point(503, 9)
         BtnCalculate.Name = "BtnCalculate"
         BtnCalculate.Size = New Size(244, 40)
         BtnCalculate.TabIndex = 7
         BtnCalculate.Text = "Calculate Table Charge"
-        BtnCalculate.UseVisualStyleBackColor = True
+        BtnCalculate.UseVisualStyleBackColor = False
         ' 
         ' BtnTotal
         ' 
         BtnTotal.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         BtnTotal.AutoSize = True
+        BtnTotal.BackColor = Color.Black
+        BtnTotal.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnTotal.ForeColor = Color.White
         BtnTotal.Location = New Point(503, 62)
         BtnTotal.Name = "BtnTotal"
         BtnTotal.Size = New Size(244, 40)
         BtnTotal.TabIndex = 13
         BtnTotal.Text = "Calculate Total"
-        BtnTotal.UseVisualStyleBackColor = True
+        BtnTotal.UseVisualStyleBackColor = False
         ' 
         ' BtnExport
         ' 
         BtnExport.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        BtnExport.BackColor = Color.Black
+        BtnExport.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        BtnExport.ForeColor = Color.White
         BtnExport.Location = New Point(753, 62)
         BtnExport.Name = "BtnExport"
         BtnExport.Size = New Size(244, 40)
         BtnExport.TabIndex = 3
         BtnExport.Text = "Export"
-        BtnExport.UseVisualStyleBackColor = True
+        BtnExport.UseVisualStyleBackColor = False
         ' 
         ' TotalTableChargeLabel
         ' 
         TotalTableChargeLabel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        TotalTableChargeLabel.BackColor = SystemColors.Control
+        TotalTableChargeLabel.BackColor = Color.Black
         TotalTableChargeLabel.BorderStyle = BorderStyle.FixedSingle
+        TotalTableChargeLabel.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        TotalTableChargeLabel.ForeColor = Color.White
         TotalTableChargeLabel.Location = New Point(1003, 14)
         TotalTableChargeLabel.Name = "TotalTableChargeLabel"
         TotalTableChargeLabel.Size = New Size(244, 38)
@@ -272,7 +307,7 @@ Partial Class Form2
         FlowLayoutPanel1.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         FlowLayoutPanel1.AutoSize = True
         FlowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink
-        FlowLayoutPanel1.Location = New Point(802, 455)
+        FlowLayoutPanel1.Location = New Point(802, 452)
         FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         FlowLayoutPanel1.Size = New Size(0, 0)
         FlowLayoutPanel1.TabIndex = 12
@@ -282,10 +317,11 @@ Partial Class Form2
         DataGridView1.AllowUserToAddRows = False
         DataGridView1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        DataGridView1.BackgroundColor = SystemColors.ActiveCaption
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = SystemColors.Window
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
         DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
@@ -297,11 +333,12 @@ Partial Class Form2
         DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.WrapMode = DataGridViewTriState.True
         DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle2
-        DataGridView1.Size = New Size(1549, 580)
+        DataGridView1.Size = New Size(1549, 577)
         DataGridView1.TabIndex = 0
         ' 
         ' TabPage2
         ' 
+        TabPage2.BackColor = Color.Green
         TabPage2.Controls.Add(ExpiredMemberLabel)
         TabPage2.Controls.Add(ActiveMemberLabel)
         TabPage2.Controls.Add(BtnCheckExpired)
@@ -314,19 +351,18 @@ Partial Class Form2
         TabPage2.Controls.Add(BtnDetails)
         TabPage2.Controls.Add(BtnAddMember)
         TabPage2.Controls.Add(MembershipDataGrid)
-        TabPage2.Location = New Point(4, 37)
+        TabPage2.Location = New Point(4, 40)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(1599, 728)
+        TabPage2.Size = New Size(1599, 725)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Membership Manager"
-        TabPage2.UseVisualStyleBackColor = True
         ' 
         ' ExpiredMemberLabel
         ' 
         ExpiredMemberLabel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         ExpiredMemberLabel.Font = New Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        ExpiredMemberLabel.Location = New Point(1338, 469)
+        ExpiredMemberLabel.Location = New Point(1338, 466)
         ExpiredMemberLabel.Name = "ExpiredMemberLabel"
         ExpiredMemberLabel.Size = New Size(177, 114)
         ExpiredMemberLabel.TabIndex = 13
@@ -347,7 +383,7 @@ Partial Class Form2
         ' BtnCheckExpired
         ' 
         BtnCheckExpired.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
-        BtnCheckExpired.Location = New Point(1383, 623)
+        BtnCheckExpired.Location = New Point(1383, 620)
         BtnCheckExpired.Name = "BtnCheckExpired"
         BtnCheckExpired.Size = New Size(88, 44)
         BtnCheckExpired.TabIndex = 11
@@ -370,7 +406,7 @@ Partial Class Form2
         PictureBox2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         PictureBox2.BackgroundImage = CType(resources.GetObject("PictureBox2.BackgroundImage"), Image)
         PictureBox2.BackgroundImageLayout = ImageLayout.Stretch
-        PictureBox2.Location = New Point(1078, 412)
+        PictureBox2.Location = New Point(1078, 409)
         PictureBox2.Name = "PictureBox2"
         PictureBox2.Size = New Size(194, 230)
         PictureBox2.TabIndex = 8
@@ -391,7 +427,7 @@ Partial Class Form2
         Label2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(1293, 412)
+        Label2.Location = New Point(1293, 409)
         Label2.Name = "Label2"
         Label2.Size = New Size(294, 31)
         Label2.TabIndex = 5
@@ -423,44 +459,41 @@ Partial Class Form2
         ' BtnDetails
         ' 
         BtnDetails.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
-        BtnDetails.Location = New Point(632, 612)
+        BtnDetails.BackColor = Color.Black
+        BtnDetails.ForeColor = Color.White
+        BtnDetails.Location = New Point(632, 609)
         BtnDetails.Name = "BtnDetails"
         BtnDetails.Size = New Size(324, 66)
         BtnDetails.TabIndex = 2
         BtnDetails.Text = "Details"
-        BtnDetails.UseVisualStyleBackColor = True
+        BtnDetails.UseVisualStyleBackColor = False
         ' 
         ' BtnAddMember
         ' 
         BtnAddMember.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
-        BtnAddMember.Location = New Point(139, 612)
+        BtnAddMember.BackColor = Color.Black
+        BtnAddMember.ForeColor = Color.White
+        BtnAddMember.Location = New Point(139, 609)
         BtnAddMember.Name = "BtnAddMember"
         BtnAddMember.Size = New Size(324, 66)
         BtnAddMember.TabIndex = 1
         BtnAddMember.Text = "Add Member"
-        BtnAddMember.UseVisualStyleBackColor = True
+        BtnAddMember.UseVisualStyleBackColor = False
         ' 
         ' MembershipDataGrid
         ' 
         MembershipDataGrid.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        MembershipDataGrid.BackgroundColor = SystemColors.ActiveCaption
         MembershipDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = SystemColors.Window
-        DataGridViewCellStyle3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle3.ForeColor = SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = DataGridViewTriState.False
-        MembershipDataGrid.DefaultCellStyle = DataGridViewCellStyle3
         MembershipDataGrid.Location = New Point(42, 34)
         MembershipDataGrid.Name = "MembershipDataGrid"
         MembershipDataGrid.ReadOnly = True
         MembershipDataGrid.RowHeadersWidth = 51
-        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.WrapMode = DataGridViewTriState.False
-        MembershipDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.WrapMode = DataGridViewTriState.False
+        MembershipDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle3
         MembershipDataGrid.ShowCellToolTips = False
-        MembershipDataGrid.Size = New Size(993, 535)
+        MembershipDataGrid.Size = New Size(993, 532)
         MembershipDataGrid.TabIndex = 0
         ' 
         ' TabPage4
@@ -468,10 +501,10 @@ Partial Class Form2
         TabPage4.Controls.Add(BtnSaveNotes)
         TabPage4.Controls.Add(RichTextBox1)
         TabPage4.Controls.Add(TableLayoutPanel2)
-        TabPage4.Location = New Point(4, 37)
+        TabPage4.Location = New Point(4, 40)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(1599, 728)
+        TabPage4.Size = New Size(1599, 725)
         TabPage4.TabIndex = 3
         TabPage4.Text = "Notes Ans AddOns"
         TabPage4.UseVisualStyleBackColor = True
@@ -479,28 +512,32 @@ Partial Class Form2
         ' BtnSaveNotes
         ' 
         BtnSaveNotes.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        BtnSaveNotes.Location = New Point(675, 649)
+        BtnSaveNotes.BackColor = Color.Black
+        BtnSaveNotes.ForeColor = Color.White
+        BtnSaveNotes.Location = New Point(675, 646)
         BtnSaveNotes.Name = "BtnSaveNotes"
         BtnSaveNotes.Size = New Size(244, 60)
         BtnSaveNotes.TabIndex = 1
         BtnSaveNotes.Text = "Save Notes"
-        BtnSaveNotes.UseVisualStyleBackColor = True
+        BtnSaveNotes.UseVisualStyleBackColor = False
         ' 
         ' RichTextBox1
         ' 
         RichTextBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        RichTextBox1.BackColor = SystemColors.ActiveCaption
         RichTextBox1.BorderStyle = BorderStyle.FixedSingle
-        RichTextBox1.Font = New Font("Franklin Gothic Medium", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        RichTextBox1.Font = New Font("Franklin Gothic Heavy", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        RichTextBox1.ForeColor = Color.Black
         RichTextBox1.Location = New Point(29, 30)
         RichTextBox1.Name = "RichTextBox1"
-        RichTextBox1.Size = New Size(1549, 594)
+        RichTextBox1.Size = New Size(1549, 591)
         RichTextBox1.TabIndex = 0
         RichTextBox1.Text = ""
         ' 
         ' TableLayoutPanel2
         ' 
         TableLayoutPanel2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        TableLayoutPanel2.BackColor = SystemColors.Control
+        TableLayoutPanel2.BackColor = Color.Green
         TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetDouble
         TableLayoutPanel2.ColumnCount = 1
         TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50F))
@@ -508,13 +545,14 @@ Partial Class Form2
         TableLayoutPanel2.Name = "TableLayoutPanel2"
         TableLayoutPanel2.RowCount = 1
         TableLayoutPanel2.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
-        TableLayoutPanel2.Size = New Size(1581, 627)
+        TableLayoutPanel2.Size = New Size(1581, 624)
         TableLayoutPanel2.TabIndex = 2
         ' 
         ' Form2
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(128), CByte(64), CByte(0))
         ClientSize = New Size(1631, 793)
         Controls.Add(TabControl1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
