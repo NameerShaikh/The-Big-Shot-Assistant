@@ -552,7 +552,9 @@ Partial Class Form2
         ' 
         ' RichTextBox1
         ' 
+        RichTextBox1.AcceptsTab = True
         RichTextBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        RichTextBox1.AutoWordSelection = True
         RichTextBox1.BackColor = SystemColors.Info
         RichTextBox1.BorderStyle = BorderStyle.FixedSingle
         RichTextBox1.Font = New Font("Franklin Gothic Heavy", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -791,14 +793,16 @@ Partial Class Form2
         ' 
         ' RichTextBox2
         ' 
+        RichTextBox2.AcceptsTab = True
         RichTextBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
+        RichTextBox2.AutoWordSelection = True
         RichTextBox2.BackColor = SystemColors.Info
         RichTextBox2.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
         RichTextBox2.Location = New Point(906, 73)
         RichTextBox2.Name = "RichTextBox2"
         RichTextBox2.Size = New Size(642, 532)
         RichTextBox2.TabIndex = 13
-        RichTextBox2.Text = "Remarks regrding to inventory here....."
+        RichTextBox2.Text = ""
         ' 
         ' Label11
         ' 

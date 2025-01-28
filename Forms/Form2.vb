@@ -34,6 +34,8 @@ Public Class Form2
 
 
         UpdateMembershipIcons()
+        placeholdertextfunction()
+        placeholdertextfunction2()
 
     End Sub
 
@@ -429,7 +431,7 @@ Public Class Form2
                 selectedRow.Cells("Date").Value = DateTime.Now.ToString("dd MMM yy") ' Format: 20 Jan 25
 
                 ' Set the current system time in the Start Time column
-                selectedRow.Cells("StartTime").Value = DateTime.Now.ToString("hh:mm tt") ' Format: 02:30 PM
+                selectedRow.Cells("StartTime").Value = DateTime.Now.ToString("HH:mm") ' Format: 24 hrs
             Else
                 MessageBox.Show("Date or Start Time column not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
@@ -452,7 +454,7 @@ Public Class Form2
                 Dim currentDateTime As DateTime = DateTime.Now
 
                 ' Set the current system time to the End Time column
-                selectedRow.Cells("EndTime").Value = currentDateTime.ToString("hh:mm tt") ' Format: 01:00 AM
+                selectedRow.Cells("EndTime").Value = currentDateTime.ToString("HH:mm") ' Format: 01:00 AM
             Else
                 MessageBox.Show("Date, Start Time, or End Time column not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
@@ -493,7 +495,7 @@ Public Class Form2
                     Dim gameType As String = row.Cells("GameType").Value?.ToString()?.ToLower()
                     Dim startTime As DateTime = DateTime.Parse(row.Cells("StartTime").Value?.ToString())
                     Dim endTime As DateTime = DateTime.Parse(row.Cells("EndTime").Value?.ToString())
-                    Dim duration As Double = (endTime - startTime).TotalMinutes
+                    Dim duration As TimeSpan
                     Dim memberStatus As String = row.Cells("Member").Value?.ToString()?.ToLower()
                     Dim paymentMethod As String = row.Cells("Payment").Value?.ToString()?.ToLower()
                     Dim amount As Double = 0
@@ -505,42 +507,60 @@ Public Class Form2
                         Continue For
                     End If
 
+
+                    If endTime < startTime Then
+                        duration = (endTime + TimeSpan.FromDays(1)) - startTime
+                    Else
+                        duration = endTime - startTime
+                    End If
+
+
+                    ' Convert the total time difference to minutes (using TotalMinutes property of TimeSpan)
+                    Dim totalMinutes As Integer = CInt(Math.Floor(duration.TotalMinutes))
+
+
                     Select Case gameType
                         Case "pool"
-                            If duration <= 30 Then
+                            ' Pool rates: $100 for 30 mins, $150 for 60 mins, then $150 per hour for extra time
+                            If totalMinutes <= 30 Then
                                 amount = 100
-                            ElseIf duration <= 50 Then
-                                amount = 100 + (duration - 30) * (150 / 60)
-                            ElseIf duration <= 60 Then
+                            ElseIf totalMinutes <= 50 Then
+                                amount = 100 + (totalMinutes - 30) * (150 / 60)
+                            ElseIf totalMinutes <= 60 Then
                                 amount = 150
                             Else
-                                amount = 150 + (duration - 60) * (150 / 60)
+                                ' Calculate additional minutes beyond 60
+                                amount = 150 + ((totalMinutes - 60) * (150 / 60))
                             End If
 
                         Case "mini snooker"
-                            If duration <= 30 Then
+                            ' Mini Snooker rates: $130 for 30 mins, $200 for 60 mins, then $200 per hour for extra time
+                            If totalMinutes <= 30 Then
                                 amount = 130
-                            ElseIf duration <= 50 Then
-                                amount = 130 + (duration - 30) * (200 / 60)
-                            ElseIf duration <= 60 Then
+                            ElseIf totalMinutes <= 50 Then
+                                amount = 130 + (totalMinutes - 30) * (200 / 60)
+                            ElseIf totalMinutes <= 60 Then
                                 amount = 200
                             Else
-                                amount = 200 + (duration - 60) * (200 / 60)
+                                ' Calculate additional minutes beyond 60
+                                amount = 200 + ((totalMinutes - 60) * (200 / 60))
                             End If
 
                         Case "snooker"
                             If paymentMethod = "time wise" Then
-                                If duration <= 30 Then
+                                ' Snooker time-wise rates: $150 for 30 mins, $250 for 60 mins, then $200 per hour for extra time
+                                If totalMinutes <= 30 Then
                                     amount = 150
-                                ElseIf duration <= 50 Then
-                                    amount = 150 + (duration - 30) * (200 / 60)
-                                ElseIf duration <= 60 Then
+                                ElseIf totalMinutes <= 50 Then
+                                    amount = 150 + (totalMinutes - 30) * (250 / 60)
+                                ElseIf totalMinutes <= 60 Then
                                     amount = 250
                                 Else
-                                    amount = 200 + (duration - 60) * (200 / 60)
+                                    ' Calculate additional minutes beyond 60
+                                    amount = 250 + ((totalMinutes - 60) * (250 / 60))
                                 End If
                             ElseIf paymentMethod = "frame wise" Then
-                                ' Existing frame-based calculation logic
+                                ' Frame-based calculation
                                 Dim frames As Integer = Integer.Parse(row.Cells("FrameNumber").Value?.ToString())
                                 If frames = 1 Then
                                     amount = 150
@@ -919,7 +939,28 @@ Public Class Form2
     End Function
 
 
+    ' Store the placeholder text in a variable
+    Dim placeholderText2 As String = "Keep note of small things here....."
 
+    Private Sub RichTextBox1_Enter(sender As Object, e As EventArgs) Handles RichTextBox1.Enter
+        ' Clear the placeholder text when the user starts typing
+        If RichTextBox1.Text = placeholderText2 Then
+            RichTextBox1.Clear()
+        End If
+    End Sub
+
+    Private Sub RichTextBox1_Leave(sender As Object, e As EventArgs) Handles RichTextBox1.Leave
+        ' Restore placeholder text if the user leaves it empty
+        If String.IsNullOrWhiteSpace(RichTextBox1.Text) Then
+            RichTextBox1.Text = placeholderText2
+            RichTextBox1.Text = placeholderText2
+        End If
+    End Sub
+
+    Private Sub placeholdertextfunction()
+        RichTextBox1.Text = placeholderText2
+
+    End Sub
 
 
 
@@ -937,6 +978,7 @@ Public Class Form2
         ' Get the current date and time for timestamping the data inside the file
         Dim currentDateTime As String = DateTime.Now.ToString("yyyyMMdd_HHmmss")
         ExportNotesAndAddOns(currentDateTime)
+        placeholdertextfunction()
 
     End Sub
 
@@ -1118,55 +1160,43 @@ Public Class Form2
 
 
 
-
-    Dim exportInitiated As Boolean = False ' Flag to track export initiation
-    Dim closingInitiated As Boolean = False ' Flag to track if form closing is initiated
+    ' Declare a flag to prevent showing the message box multiple times
+    Private exitConfirmed As Boolean = False
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Try
-            ' Check if the form closing logic has been initiated before
-            If Not closingInitiated Then
-                ' Mark the form closing as initiated
-                closingInitiated = True
+            ' If exit is not confirmed yet, show the confirmation message box
+            If Not exitConfirmed Then
+                Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-                ' Check if export has already been initiated
-                If Not exportInitiated Then
-                    ' Show message box prompting user to export data before closing
-                    Dim result As DialogResult = MessageBox.Show("Do you want to export the data before closing?", "Export Data", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+                If result = DialogResult.Yes Then
+                    ' Set the flag to True to prevent showing the message box again
+                    exitConfirmed = True
 
-                    ' If user chooses Yes, export the data
-                    If result = DialogResult.Yes Then
-                        ' Set the flag to true to indicate export has been initiated
-                        exportInitiated = True
+                    ' Call the export method or perform the export logic
+                    BtnExport.PerformClick() ' Assuming BtnExport is your export button
 
-                        ' Trigger the export logic (only once)
-                        BtnExport.PerformClick()  ' Triggering the Export process
+                    ' After export, show confirmation message and exit
+                    MessageBox.Show("Data exported successfully. Exiting the application.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Application.Exit()
 
-                        ' Show success message and exit application after export
-                        MessageBox.Show("Data exported successfully. Closing the application.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Application.Exit()  ' Exit the application
-
-                        ' If user chooses No, close the application without exporting
-                    ElseIf result = DialogResult.No Then
-                        MessageBox.Show("Closing the application without exporting data.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Application.Exit()  ' Exit the application
-
-                        ' If user clicks Cancel, prevent the form from closing
-                    ElseIf result = DialogResult.Cancel Then
-                        e.Cancel = True ' Cancel the form closing event
-                        MessageBox.Show("The application will not close. Please save your data or go back.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End If
+                ElseIf result = DialogResult.No Then
+                    ' Cancel the closing event if the user selects No
+                    e.Cancel = True
                 End If
             Else
-                ' Prevent additional closing prompts if closing was initiated
+                ' Prevent the form from closing again if exit was already confirmed
                 e.Cancel = False
             End If
 
         Catch ex As Exception
-            ' Handle any errors that occur during the exit process
-            MessageBox.Show("An error occurred while attempting to exit: " & ex.Message, "Exit Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' Handle any errors
+            MessageBox.Show("An error occurred while closing the application: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
+
 
 
 
@@ -1296,7 +1326,7 @@ Public Class Form2
         TextBox4.Clear()
         TextBox5.Clear()
         TextBox6.Clear()
-        RichTextBox2.Clear()
+        RichTextBox2.Text = placeholderText
     End Sub
 
 
@@ -1311,7 +1341,28 @@ Public Class Form2
     End Sub
 
 
+    ' Store the placeholder text in a variable
+    Dim placeholderText As String = "Remarks regrding to inventory here....."
 
+    Private Sub RichTextBox2_Enter(sender As Object, e As EventArgs) Handles RichTextBox2.Enter
+        ' Clear the placeholder text when the user starts typing
+        If RichTextBox2.Text = placeholderText Then
+            RichTextBox2.Clear()
+        End If
+    End Sub
+
+    Private Sub RichTextBox2_Leave(sender As Object, e As EventArgs) Handles RichTextBox2.Leave
+        ' Restore placeholder text if the user leaves it empty
+        If String.IsNullOrWhiteSpace(RichTextBox2.Text) Then
+            RichTextBox2.Text = placeholderText
+            RichTextBox2.ForeColor = Color.Gray ' Set placeholder text color
+        End If
+    End Sub
+
+    Private Sub placeholdertextfunction2()
+        RichTextBox2.Text = placeholderText
+
+    End Sub
 End Class
 
 
