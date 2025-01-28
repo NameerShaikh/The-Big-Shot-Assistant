@@ -38,9 +38,15 @@ Public Class Form2
     End Sub
 
 
-    Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
-
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        ' Check if the selected tab is the Inventory tab
+        If TabControl1.SelectedTab.Text = "Inventory Manager" Then
+            ' Call your function
+            SetInventoryDateTimeTextbox()
+        End If
     End Sub
+
+
     Private currentSerialNumber As Integer = 2
 
     Private Function GetNextSerialNumber() As Integer
@@ -56,6 +62,15 @@ Public Class Form2
         ' Return the next serial number
         Return lastSerialNumber + 1
     End Function
+
+    ' Event: Trigger the button click when editing starts in the last row
+    Private Sub DataGridView1_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
+        ' Check if the user is editing the last row
+        If e.RowIndex = DataGridView1.Rows.Count - 1 Then
+            ' Simulate the BtnAddRow click event
+            BtnAddRow.PerformClick()
+        End If
+    End Sub
 
     Private Sub BtnAddRow_Click(sender As Object, e As EventArgs) Handles BtnAddRow.Click
         ' Create a new row
@@ -281,7 +296,8 @@ Public Class Form2
         newRow.Cells("Total").Value = ""  ' Default Total
         newRow.Cells("PaymentStatus").Value = ""  ' Default Payment Status
 
-
+        ' Attach the CellBeginEdit event handler
+        AddHandler DataGridView1.CellBeginEdit, AddressOf DataGridView1_CellBeginEdit
 
 
 
@@ -1145,6 +1161,133 @@ Public Class Form2
         ' Update the label with the total revenue in INR format
         TotalTableChargeLabel.Text = totalBaseRevenue.ToString("N2") ' INR symbol with 2 decimal places
     End Sub
+
+
+
+    Private Sub TabPage3_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
+        BtnSetDateTime.PerformClick()
+    End Sub
+
+
+
+
+
+
+
+
+    Private Sub BtnSetDateTime_Click(sender As Object, e As EventArgs) Handles BtnSetDateTime.Click
+        SetInventoryDateTimeTextbox()
+    End Sub
+
+
+
+
+
+    Private Sub BtnSaveInventory_Click(sender As Object, e As EventArgs) Handles BtnSaveInventory.Click
+        ' Get input values
+        Dim dateValue As String = If(String.IsNullOrWhiteSpace(TextBox1.Text), DateTime.Now.ToString("yyyy-MM-dd"), TextBox1.Text)
+        Dim timeValue As String = If(String.IsNullOrWhiteSpace(TextBox2.Text), DateTime.Now.ToString("HH:mm:ss"), TextBox2.Text)
+        Dim itemValue As String = TextBox3.Text
+        Dim quantityValue As String = TextBox4.Text ' Optional
+        Dim pricePerQuantityValue As String = TextBox5.Text ' Optional
+        Dim totalValue As String = TextBox6.Text
+        Dim remarksValue As String = RichTextBox2.Text ' Optional
+
+        ' Validate mandatory fields
+        If String.IsNullOrWhiteSpace(itemValue) Then
+            MessageBox.Show("The Item field is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If String.IsNullOrWhiteSpace(totalValue) Then
+            MessageBox.Show("The Total field is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' File path for the Excel file
+        Dim filePath As String = "C:\The Big Shot Assistant\Database\Inventory.xlsx"
+
+        ' Check if the directory exists
+        Dim directoryPath As String = Path.GetDirectoryName(filePath)
+        If Not Directory.Exists(directoryPath) Then
+            Directory.CreateDirectory(directoryPath) ' Create the directory if it doesn't exist
+        End If
+
+        ' Check if the file already exists
+        Dim fileExists As Boolean = File.Exists(filePath)
+
+        ' Create or update the Excel file
+        Using package As New ExcelPackage(New FileInfo(filePath))
+            Dim worksheet As ExcelWorksheet
+
+            If fileExists Then
+                ' Load the existing worksheet
+                worksheet = package.Workbook.Worksheets.FirstOrDefault()
+            Else
+                ' Create a new worksheet
+                worksheet = package.Workbook.Worksheets.Add("Inventory")
+                ' Add headers to the worksheet
+                worksheet.Cells(1, 1).Value = "Date"
+                worksheet.Cells(1, 2).Value = "Time"
+                worksheet.Cells(1, 3).Value = "Item"
+                worksheet.Cells(1, 4).Value = "Quantity"
+                worksheet.Cells(1, 5).Value = "Price per Quantity"
+                worksheet.Cells(1, 6).Value = "Total"
+                worksheet.Cells(1, 7).Value = "Remarks"
+            End If
+
+            Dim nextRow As Integer
+            If worksheet.Dimension Is Nothing Then
+                nextRow = 2 ' Start from the second row if the sheet is empty (row 1 is for headers)
+            Else
+                nextRow = worksheet.Dimension.End.Row + 1
+            End If
+
+
+            ' Add data to the worksheet
+            worksheet.Cells(nextRow, 1).Value = dateValue
+            worksheet.Cells(nextRow, 2).Value = timeValue
+            worksheet.Cells(nextRow, 3).Value = itemValue
+            worksheet.Cells(nextRow, 4).Value = If(String.IsNullOrWhiteSpace(quantityValue), "N/A", quantityValue)
+            worksheet.Cells(nextRow, 5).Value = If(String.IsNullOrWhiteSpace(pricePerQuantityValue), "N/A", pricePerQuantityValue)
+            worksheet.Cells(nextRow, 6).Value = totalValue
+            worksheet.Cells(nextRow, 7).Value = If(String.IsNullOrWhiteSpace(remarksValue), "N/A", remarksValue)
+
+            ' Save the Excel file
+            package.Save()
+        End Using
+
+        ' Show success message
+        MessageBox.Show("Data saved successfully to Inventory.xlsx!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Clear the input fields for the next entry
+        ClearInputs()
+    End Sub
+
+    ' Clear input fields
+    Private Sub ClearInputs()
+        TextBox1.Clear()
+        TextBox2.Clear()
+        TextBox3.Clear()
+        TextBox4.Clear()
+        TextBox5.Clear()
+        TextBox6.Clear()
+        RichTextBox2.Clear()
+    End Sub
+
+
+
+    Private Sub SetInventoryDateTimeTextbox()
+        ' Set current date in TextBox1
+        TextBox1.Text = DateTime.Now.ToString("yyyy-MM-dd") ' Format: 2025-01-28
+
+        ' Set current time in TextBox2
+        TextBox2.Text = DateTime.Now.ToString("HH:mm:ss") ' Format: 14:30:45
+
+    End Sub
+
+
+
 End Class
 
 

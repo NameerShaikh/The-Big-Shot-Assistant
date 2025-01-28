@@ -61,6 +61,25 @@ Partial Class Form2
         BtnSaveNotes = New Button()
         RichTextBox1 = New RichTextBox()
         TableLayoutPanel2 = New TableLayoutPanel()
+        Label3 = New Label()
+        TabPage3 = New TabPage()
+        TableLayoutPanel3 = New TableLayoutPanel()
+        BtnSaveInventory = New Button()
+        BtnSetDateTime = New Button()
+        TextBox6 = New TextBox()
+        TextBox5 = New TextBox()
+        TextBox4 = New TextBox()
+        TextBox3 = New TextBox()
+        TextBox2 = New TextBox()
+        Label8 = New Label()
+        Label9 = New Label()
+        Label10 = New Label()
+        TextBox1 = New TextBox()
+        Label6 = New Label()
+        Label5 = New Label()
+        Label7 = New Label()
+        RichTextBox2 = New RichTextBox()
+        Label11 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TableLayoutPanel1.SuspendLayout()
@@ -71,6 +90,9 @@ Partial Class Form2
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(MembershipDataGrid, ComponentModel.ISupportInitialize).BeginInit()
         TabPage4.SuspendLayout()
+        TableLayoutPanel2.SuspendLayout()
+        TabPage3.SuspendLayout()
+        TableLayoutPanel3.SuspendLayout()
         SuspendLayout()
         ' 
         ' TabControl1
@@ -80,6 +102,7 @@ Partial Class Form2
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
         TabControl1.Controls.Add(TabPage4)
+        TabControl1.Controls.Add(TabPage3)
         TabControl1.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TabControl1.Location = New Point(12, 12)
         TabControl1.Name = "TabControl1"
@@ -383,12 +406,15 @@ Partial Class Form2
         ' BtnCheckExpired
         ' 
         BtnCheckExpired.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        BtnCheckExpired.BackColor = Color.Black
+        BtnCheckExpired.Font = New Font("Segoe UI", 13.8F, FontStyle.Bold)
+        BtnCheckExpired.ForeColor = Color.White
         BtnCheckExpired.Location = New Point(1383, 620)
         BtnCheckExpired.Name = "BtnCheckExpired"
         BtnCheckExpired.Size = New Size(88, 44)
         BtnCheckExpired.TabIndex = 11
         BtnCheckExpired.Text = "Check"
-        BtnCheckExpired.UseVisualStyleBackColor = True
+        BtnCheckExpired.UseVisualStyleBackColor = False
         ' 
         ' Label4
         ' 
@@ -415,12 +441,15 @@ Partial Class Form2
         ' BtnCheckActive
         ' 
         BtnCheckActive.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        BtnCheckActive.BackColor = Color.Black
+        BtnCheckActive.Font = New Font("Segoe UI", 13.8F, FontStyle.Bold)
+        BtnCheckActive.ForeColor = Color.White
         BtnCheckActive.Location = New Point(1383, 318)
         BtnCheckActive.Name = "BtnCheckActive"
         BtnCheckActive.Size = New Size(88, 44)
         BtnCheckActive.TabIndex = 7
         BtnCheckActive.Text = "Check"
-        BtnCheckActive.UseVisualStyleBackColor = True
+        BtnCheckActive.UseVisualStyleBackColor = False
         ' 
         ' Label2
         ' 
@@ -524,13 +553,13 @@ Partial Class Form2
         ' RichTextBox1
         ' 
         RichTextBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        RichTextBox1.BackColor = SystemColors.ActiveCaption
+        RichTextBox1.BackColor = SystemColors.Info
         RichTextBox1.BorderStyle = BorderStyle.FixedSingle
         RichTextBox1.Font = New Font("Franklin Gothic Heavy", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         RichTextBox1.ForeColor = Color.Black
-        RichTextBox1.Location = New Point(29, 30)
+        RichTextBox1.Location = New Point(30, 49)
         RichTextBox1.Name = "RichTextBox1"
-        RichTextBox1.Size = New Size(1549, 591)
+        RichTextBox1.Size = New Size(1549, 572)
         RichTextBox1.TabIndex = 0
         RichTextBox1.Text = ""
         ' 
@@ -541,12 +570,248 @@ Partial Class Form2
         TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetDouble
         TableLayoutPanel2.ColumnCount = 1
         TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50F))
+        TableLayoutPanel2.Controls.Add(Label3, 0, 0)
         TableLayoutPanel2.Location = New Point(12, 12)
         TableLayoutPanel2.Name = "TableLayoutPanel2"
         TableLayoutPanel2.RowCount = 1
         TableLayoutPanel2.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
-        TableLayoutPanel2.Size = New Size(1581, 624)
+        TableLayoutPanel2.Size = New Size(1581, 707)
         TableLayoutPanel2.TabIndex = 2
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.BackColor = Color.RosyBrown
+        Label3.Font = New Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(6, 3)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(312, 31)
+        Label3.TabIndex = 0
+        Label3.Text = "Notes and AddOns Section :"
+        ' 
+        ' TabPage3
+        ' 
+        TabPage3.BackColor = Color.Green
+        TabPage3.Controls.Add(TableLayoutPanel3)
+        TabPage3.Controls.Add(RichTextBox2)
+        TabPage3.Controls.Add(Label11)
+        TabPage3.Location = New Point(4, 40)
+        TabPage3.Name = "TabPage3"
+        TabPage3.Padding = New Padding(3)
+        TabPage3.Size = New Size(1599, 725)
+        TabPage3.TabIndex = 4
+        TabPage3.Text = "Inventory Manager"
+        ' 
+        ' TableLayoutPanel3
+        ' 
+        TableLayoutPanel3.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        TableLayoutPanel3.BackColor = Color.SkyBlue
+        TableLayoutPanel3.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset
+        TableLayoutPanel3.ColumnCount = 2
+        TableLayoutPanel3.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50F))
+        TableLayoutPanel3.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50F))
+        TableLayoutPanel3.Controls.Add(BtnSaveInventory, 1, 6)
+        TableLayoutPanel3.Controls.Add(BtnSetDateTime, 0, 6)
+        TableLayoutPanel3.Controls.Add(TextBox6, 1, 5)
+        TableLayoutPanel3.Controls.Add(TextBox5, 1, 4)
+        TableLayoutPanel3.Controls.Add(TextBox4, 1, 3)
+        TableLayoutPanel3.Controls.Add(TextBox3, 1, 2)
+        TableLayoutPanel3.Controls.Add(TextBox2, 1, 1)
+        TableLayoutPanel3.Controls.Add(Label8, 0, 3)
+        TableLayoutPanel3.Controls.Add(Label9, 0, 4)
+        TableLayoutPanel3.Controls.Add(Label10, 0, 5)
+        TableLayoutPanel3.Controls.Add(TextBox1, 1, 0)
+        TableLayoutPanel3.Controls.Add(Label6, 0, 0)
+        TableLayoutPanel3.Controls.Add(Label5, 0, 2)
+        TableLayoutPanel3.Controls.Add(Label7, 0, 1)
+        TableLayoutPanel3.Location = New Point(52, 20)
+        TableLayoutPanel3.Name = "TableLayoutPanel3"
+        TableLayoutPanel3.RowCount = 7
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Percent, 14.2857141F))
+        TableLayoutPanel3.Size = New Size(722, 678)
+        TableLayoutPanel3.TabIndex = 0
+        ' 
+        ' BtnSaveInventory
+        ' 
+        BtnSaveInventory.Anchor = AnchorStyles.None
+        BtnSaveInventory.BackColor = Color.Black
+        BtnSaveInventory.Font = New Font("Segoe UI", 13.8F, FontStyle.Bold)
+        BtnSaveInventory.ForeColor = Color.White
+        BtnSaveInventory.Location = New Point(382, 592)
+        BtnSaveInventory.Name = "BtnSaveInventory"
+        BtnSaveInventory.Size = New Size(318, 69)
+        BtnSaveInventory.TabIndex = 1
+        BtnSaveInventory.Text = "Save Inventory"
+        BtnSaveInventory.UseVisualStyleBackColor = False
+        ' 
+        ' BtnSetDateTime
+        ' 
+        BtnSetDateTime.Anchor = AnchorStyles.None
+        BtnSetDateTime.BackColor = Color.Black
+        BtnSetDateTime.Font = New Font("Segoe UI", 13.8F, FontStyle.Bold)
+        BtnSetDateTime.ForeColor = Color.White
+        BtnSetDateTime.Location = New Point(75, 591)
+        BtnSetDateTime.Name = "BtnSetDateTime"
+        BtnSetDateTime.Size = New Size(211, 72)
+        BtnSetDateTime.TabIndex = 2
+        BtnSetDateTime.Text = "Set Date & Time"
+        BtnSetDateTime.UseVisualStyleBackColor = False
+        ' 
+        ' TextBox6
+        ' 
+        TextBox6.Anchor = AnchorStyles.None
+        TextBox6.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        TextBox6.Location = New Point(388, 507)
+        TextBox6.Name = "TextBox6"
+        TextBox6.Size = New Size(305, 43)
+        TextBox6.TabIndex = 12
+        ' 
+        ' TextBox5
+        ' 
+        TextBox5.Anchor = AnchorStyles.None
+        TextBox5.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        TextBox5.Location = New Point(388, 411)
+        TextBox5.Name = "TextBox5"
+        TextBox5.Size = New Size(305, 43)
+        TextBox5.TabIndex = 11
+        ' 
+        ' TextBox4
+        ' 
+        TextBox4.Anchor = AnchorStyles.None
+        TextBox4.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        TextBox4.Location = New Point(388, 315)
+        TextBox4.Name = "TextBox4"
+        TextBox4.Size = New Size(305, 43)
+        TextBox4.TabIndex = 10
+        ' 
+        ' TextBox3
+        ' 
+        TextBox3.Anchor = AnchorStyles.None
+        TextBox3.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        TextBox3.Location = New Point(388, 219)
+        TextBox3.Name = "TextBox3"
+        TextBox3.Size = New Size(305, 43)
+        TextBox3.TabIndex = 9
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.Anchor = AnchorStyles.None
+        TextBox2.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        TextBox2.Location = New Point(388, 123)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(305, 43)
+        TextBox2.TabIndex = 8
+        ' 
+        ' Label8
+        ' 
+        Label8.Anchor = AnchorStyles.Left
+        Label8.AutoSize = True
+        Label8.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label8.Location = New Point(5, 318)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(132, 38)
+        Label8.TabIndex = 3
+        Label8.Text = "Quantity"
+        Label8.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label9
+        ' 
+        Label9.Anchor = AnchorStyles.Left
+        Label9.AutoSize = True
+        Label9.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label9.Location = New Point(5, 414)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(254, 38)
+        Label9.TabIndex = 4
+        Label9.Text = "Price Per Quantity"
+        Label9.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label10
+        ' 
+        Label10.Anchor = AnchorStyles.Left
+        Label10.AutoSize = True
+        Label10.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label10.Location = New Point(5, 510)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(81, 38)
+        Label10.TabIndex = 5
+        Label10.Text = "Total"
+        Label10.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.Anchor = AnchorStyles.None
+        TextBox1.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(388, 27)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(305, 43)
+        TextBox1.TabIndex = 7
+        ' 
+        ' Label6
+        ' 
+        Label6.Anchor = AnchorStyles.Left
+        Label6.AutoSize = True
+        Label6.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label6.Location = New Point(5, 30)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(79, 38)
+        Label6.TabIndex = 1
+        Label6.Text = "Date"
+        Label6.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label5
+        ' 
+        Label5.Anchor = AnchorStyles.Left
+        Label5.AutoSize = True
+        Label5.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label5.Location = New Point(5, 222)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(78, 38)
+        Label5.TabIndex = 0
+        Label5.Text = "Item"
+        Label5.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label7
+        ' 
+        Label7.Anchor = AnchorStyles.Left
+        Label7.AutoSize = True
+        Label7.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label7.Location = New Point(5, 126)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(82, 38)
+        Label7.TabIndex = 2
+        Label7.Text = "Time"
+        Label7.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' RichTextBox2
+        ' 
+        RichTextBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
+        RichTextBox2.BackColor = SystemColors.Info
+        RichTextBox2.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        RichTextBox2.Location = New Point(906, 73)
+        RichTextBox2.Name = "RichTextBox2"
+        RichTextBox2.Size = New Size(642, 532)
+        RichTextBox2.TabIndex = 13
+        RichTextBox2.Text = "Remarks regrding to inventory here....."
+        ' 
+        ' Label11
+        ' 
+        Label11.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        Label11.AutoSize = True
+        Label11.BackColor = Color.RosyBrown
+        Label11.Font = New Font("Segoe UI", 16.2F, FontStyle.Bold)
+        Label11.Location = New Point(866, 20)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(145, 38)
+        Label11.TabIndex = 6
+        Label11.Text = "Remarks :"
+        Label11.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' Form2
         ' 
@@ -573,6 +838,12 @@ Partial Class Form2
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(MembershipDataGrid, ComponentModel.ISupportInitialize).EndInit()
         TabPage4.ResumeLayout(False)
+        TableLayoutPanel2.ResumeLayout(False)
+        TableLayoutPanel2.PerformLayout()
+        TabPage3.ResumeLayout(False)
+        TabPage3.PerformLayout()
+        TableLayoutPanel3.ResumeLayout(False)
+        TableLayoutPanel3.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -611,5 +882,24 @@ Partial Class Form2
     Friend WithEvents ActiveMemberLabel As Label
     Friend WithEvents BtnBaseTotal As Button
     Friend WithEvents TotalTableChargeLabel As Label
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents Label3 As Label
+    Friend WithEvents BtnSetDateTime As Button
+    Friend WithEvents BtnSaveInventory As Button
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents RichTextBox2 As RichTextBox
 
 End Class
