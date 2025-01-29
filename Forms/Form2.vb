@@ -1187,8 +1187,6 @@ Public Class Form2
                     ' Call the export method or perform the export logic
                     BtnExport.PerformClick() ' Assuming BtnExport is your export button
 
-                    ' After export, show confirmation message and exit
-                    MessageBox.Show("Data exported successfully. Exiting the application.", "Exit", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Application.Exit()
 
                 ElseIf result = DialogResult.No Then
