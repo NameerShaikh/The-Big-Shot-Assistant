@@ -656,26 +656,17 @@ Public Class Form2
         colName.HeaderText = "Name"
         MembershipDataGrid.Columns.Add(colName)
 
-
-
         ' Membership Type Column (Dropdown)
         Dim colGameType As New DataGridViewTextBoxColumn()
         colGameType.Name = "Game Type"
         colGameType.HeaderText = "Type"
         MembershipDataGrid.Columns.Add(colGameType)
 
-
-
-
-        ' Membership Status Column (Dropdown)
+        ' Membership Status Column
         Dim colStatus As New DataGridViewTextBoxColumn()
         colStatus.Name = "Membership Status"
         colStatus.HeaderText = "Status"
         MembershipDataGrid.Columns.Add(colStatus)
-
-
-
-
 
         ' Icon Column for Status
         Dim colStatusIcon As New DataGridViewImageColumn()
@@ -685,16 +676,16 @@ Public Class Form2
         colStatusIcon.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter ' Center alignment
         MembershipDataGrid.Columns.Add(colStatusIcon)
 
-
         ' Configure DataGridView properties
-        MembershipDataGrid.AllowUserToAddRows = True
+        MembershipDataGrid.AllowUserToAddRows = False ' Prevent extra empty rows
         MembershipDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         MembershipDataGrid.MultiSelect = False
         MembershipDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
-
-
+        ' Clear existing rows
+        MembershipDataGrid.Rows.Clear()
     End Sub
+
 
 
 
@@ -703,19 +694,27 @@ Public Class Form2
             ' Define the file path
             Dim filePath As String = "C:\The Big Shot Assistant\Database\Memberships.xlsx"
 
-
-            ' Load the data from the Excel file
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial ' Set the license context
+            ' Ensure the file exists before proceeding
+            If Not File.Exists(filePath) Then
+                MessageBox.Show("The Memberships file does not exist.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
 
             ' Load the Excel file
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial ' Set the license context
+
             Using package As New ExcelPackage(New FileInfo(filePath))
                 Dim worksheet As ExcelWorksheet = package.Workbook.Worksheets(0)
 
+                ' Ensure worksheet is not empty
+                If worksheet.Dimension Is Nothing Then Exit Sub
+
+                Dim lastRow As Integer = worksheet.Dimension.End.Row
+
                 ' Loop through each row in the Excel file (starting from the second row)
-                Dim row As Integer = 2
-                While Not String.IsNullOrEmpty(worksheet.Cells(row, 1).Text)
-                    Dim endDateText As String = worksheet.Cells(row, 6).Text ' Column 6: End Date
-                    Dim statusCell As ExcelRange = worksheet.Cells(row, 4)   ' Column 4: Status
+                For row As Integer = 2 To lastRow
+                    Dim endDateText As String = worksheet.Cells(row, 6).Text.Trim() ' Column 6: End Date
+                    Dim statusCell As ExcelRange = worksheet.Cells(row, 4)         ' Column 4: Status
 
                     ' Check if the End Date is valid
                     Dim endDate As Date
@@ -726,10 +725,11 @@ Public Class Form2
                         Else
                             statusCell.Value = "Active"
                         End If
+                    Else
+                        ' If the End Date is invalid or empty, set status to "Unknown"
+                        statusCell.Value = "Unknown"
                     End If
-
-                    row += 1
-                End While
+                Next
 
                 ' Save changes to the Excel file
                 package.Save()
@@ -739,6 +739,7 @@ Public Class Form2
             MessageBox.Show("Error updating membership statuses: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
 
 
@@ -796,7 +797,7 @@ Public Class Form2
             ' Ensure the worksheet has data
             If worksheet.Dimension Is Nothing Then Exit Sub
 
-            ' Clear existing rows in the DataGridView
+            ' Clear existing rows in the DataGridView before adding new data
             MembershipDataGrid.Rows.Clear()
 
             ' Loop through the rows in the worksheet starting from the second row (skip headers)
@@ -808,14 +809,18 @@ Public Class Form2
                 Dim status As String = worksheet.Cells(row, 4).Text ' Status
                 Dim statusIcon As Image = Nothing
 
-                ' Determine the icon based on the status
-                UpdateMembershipIcons()
+                ' Ensure that only non-empty rows are added
+                If Not String.IsNullOrWhiteSpace(membershipID) AndAlso Not String.IsNullOrWhiteSpace(name) Then
+                    ' Determine the icon based on the status
+                    UpdateMembershipIcons()
 
-                ' Add the data to the DataGridView
-                MembershipDataGrid.Rows.Add(membershipID, name, gameType, status, statusIcon)
+                    ' Add the data to the DataGridView
+                    MembershipDataGrid.Rows.Add(membershipID, name, gameType, status, statusIcon)
+                End If
             Next
         End Using
     End Sub
+
 
 
 
@@ -879,6 +884,8 @@ Public Class Form2
         addMemberForm.ShowDialog()
 
         ' Reload DataGridView after form is closed
+        UpdateMembershipStatusInExcel()
+        CalculateMembershipStatus()
         LoadMembershipData()
 
         CalculateMembershipStatus()

@@ -10,6 +10,7 @@ Public Class Form3
 
         ' Generate Member ID and automatically insert it into the textbox
         TxtMemberId.Text = GenerateMemberId()
+        CmbAmtPaid.DropDownStyle = ComboBoxStyle.DropDown
     End Sub
 
 
@@ -108,7 +109,7 @@ Public Class Form3
         Dim startDate As String = DtpStartDate.Value.ToString("yyyy-MM-dd")
         Dim endDate As String = DtpEndDate.Value.ToString("yyyy-MM-dd")
         Dim membershipDuration As String = TxtMembershipDuration.Text
-        Dim amountPaid As String = CmbAmtPaid.SelectedItem.ToString()
+        Dim amountPaid As String = CmbAmtPaid.Text.Trim() ' Works for both selected & typed values
 
         Try
 
