@@ -1170,8 +1170,12 @@ Public Class Form2
     ' Declare a flag to prevent showing the message box multiple times
     Private exitConfirmed As Boolean = False
 
-    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Try
+            'Pass the control to the tabpage1 before exiting to save the data....
+            TabControl1.SelectedTab = TabPage1
+
+
             ' If exit is not confirmed yet, show the confirmation message box
             If Not exitConfirmed Then
                 Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
